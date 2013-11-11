@@ -1,0 +1,519 @@
+    1  ls
+    2  mkdir build
+    3  cd build
+    4  cmake ..
+    5  ps -u
+    6  sudo apt-get install cmake
+    7  ls
+    8  cmake ..
+    9  ls
+   10  cd ..
+   11  ls
+   12  cd Downloads/
+   13  ls
+   14  cd v4l2ucp-2.0.2/
+   15  ls
+   16  cmake
+   17  cmake -ui
+   18  cmake -i
+   19  ls
+   20  mkdir build
+   21  cd build
+   22  cmake ..
+   23  make
+   24  cmake ..
+   25  ls
+   26  cd ..
+   27  ls
+   28  make -f Makefile
+   29  ls
+   30  make
+   31  ls
+   32  Makefile
+   33  make -f Makefile
+   34  ls
+   35  cd ..
+   36  ls
+   37  cd libdc1394-2.2.1/
+   38  ls
+   39  ./configure
+   40  make
+   41  ls
+   42  cd examples
+   43  ls
+   44  helloworld
+   45  gcc helloworld
+   46  ls
+   47  cd ..
+   48  ls
+   49  cd dc1394/
+   50  ls
+   51  cd linux
+   52  ls
+   53  make
+   54  gcc capture.c
+   55  gedit capture.c
+   56  Makefile
+   57  ./Makefile
+   58  ./helloworld
+   59  ./helloworld -o
+   60  gcc -o helloworld
+   61  make helloworld
+   62  make Makefile
+   63  ls
+   64  cd ..
+   65  ls
+   66  cd ..
+   67  ls
+   68  cd ZoneMinder-1.26.3/
+   69  ls
+   70  make
+   71  make Makefile
+   72  make -f Makefile
+   73  sudo apt-get install zoneminder
+   74  terminal
+   75  new terminal
+   76  cd ./Documents/GUVCVIEW/guvcview-src-1.7.1/src
+   77  ./guvcview
+   78  exit
+   79  ls
+   80  cd Documents/GUVCVIEW/guvcview-src-1.7.1/src
+   81  ls
+   82  ./guvcview
+   83  ls
+   84  make clean
+   85  ls
+   86  ./guvcview
+   87  make
+   88  ./guvcview
+   89  make
+   90  ./guvcview
+   91  make
+   92  make clean
+   93  make
+   94  ./guvcview
+   95  ls
+   96  cd Documents/
+   97  ls
+   98  sudo chmod 755 ./jre-6u16-linux-i586.bin 
+   99  sudo ./jre-6u16-linux-i586.bin 
+  100  ls
+  101  cd Eclipse
+  102  ls
+  103  eclipse
+  104  sudo apt-get install eclipse-platform
+  105  ls
+  106  eclipse
+  107  cd ..
+  108  ls
+  109  cd GUVCVIEW
+  110  clear
+  111  ls
+  112  cd GUV
+  113  cd GUCVIEW/
+  114  cd ..
+  115  mv GUCVIEW GUVCVIEW
+  116  ls
+  117  cd GUVCVIEW/
+  118  ls
+  119  cd guvcview-src-1.7.1/
+  120  cd
+  121  ls
+  122  ls -a
+  123  clear
+  124  man alias
+  125  alias clear c
+  126  alias c clear
+  127  alias c='clear'
+  128  ls
+  129  c
+  130  ls
+  131  history
+  132  clear
+  133  history
+  134  ls
+  135  cd Documents/
+  136  ls
+  137  cd GUVCVIEW/
+  138  cd guv
+  139  cd guvcview-src-1.7.1/
+  140  ls
+  141  c
+  142  ls
+  143  cd src
+  144  ls
+  145  cat snd_devices.h
+  146  ls
+  147  cd snd_devices.c
+  148  vi snd_devices.c
+  149  vi video_tab.c
+  150  cd ~
+  151  pwd
+  152  ls
+  153  less build
+  154  ls buil
+  155  ls build
+  156  cd ..
+  157  ls
+  158  cd ..
+  159  cd ~
+  160  make install && install -v -m644 -D doc/I18N-HOWTO /usr/share/doc/intltool-0.50.2/I18N-HOWTO
+  161  make install-sh && install -v -m644 -D doc/I18N-HOWTO /usr/share/doc/intltool-0.50.2/I18N-HOWTO
+  162  intltool -update
+  163  intltool-update
+  164  sudo apt-get install intltool
+  165  ls
+  166  cd Documents/GUVCVIEW/guvcview-src-1.7.1/
+  167  ls
+  168  cd src
+  169  ls
+  170  cd ..
+  171  ls
+  172  ls
+  173  cd Documents
+  174  ls
+  175  cd GUCVIEW/
+  176  cd ..
+  177  cd GUVCVIEW/
+  178  cd guvcview-src-1.7.1/
+  179  ls
+  180  make
+  181  ls
+  182  ls -o
+  183  vi config
+  184  ls
+  185  vi configure
+  186  c
+  187  ./configure
+  188  sudo apt-get intltool
+  189  sudo update intltool
+  190  ./configure --prefix=usr && make
+  191  ./configure --prefix=usr && make
+  192  cd ..
+  193  ls
+  194  cd ~
+  195  ls
+  196  ./configure --prefix=usr && make
+  197  ls
+  198  cd Documents/GUVCVIEW/guvcview-src-1.7.1/src
+  199  ls
+  200  cd ..
+  201  ls
+  202  pwd
+  203  ./configure --prefix=usr && make
+  204  ./configure --prefix=/usr &&  make
+  205  make check
+  206  make check.
+  207  make
+  208  Makefile
+  209  ls
+  210  clear
+  211  ./config
+  212  ./configure
+  213  ls
+  214  gedit README
+  215  execute guvcview --help
+  216  cd ..
+  217  ls
+  218  cd guvcview-src-1.7.1/
+  219  ls
+  220  make
+  221  ls
+  222  INSTALL
+  223  cd missing
+  224  ls
+  225  missing
+  226  ./missing
+  227  ./guvcview --help
+  228  ./missing --help
+  229  ./install-sh
+  230  cd INSTALL
+  231  ls
+  232  c
+  233  clear
+  234  ls
+  235  cd src
+  236  ls
+  237  make
+  238  ./Makefile.am make
+  239  ./Makefile.am
+  240  clear
+  241  ls
+  242  cd ..
+  243  ls
+  244  gedit readme
+  245  autoreconf
+  246  ls
+  247  ./configure
+  248  sudo apt-get portaudio-2.0
+  249  sudo apt-get install portaudio-2.0
+  250  ./configure
+  251  sudo apt-get install libudev
+  252  cd ~
+  253  sudo apt-get install libudev
+  254  man pkg-config
+  255  ls
+  256  clear
+  257  ls
+  258  cd Documents
+  259  cd GUVCVIEW/guvcview-src-1.7.1/
+  260  ls
+  261  ./configure --prefix=/usr
+  262  sudo apt-get install libudev-dev
+  263  sudo apt-get install libpng
+  264  sudo apt-get install libv41
+  265  sudo apt-get install libavcodec
+  266  sudo apt-get install libsdl
+  267  ./configure --path=/usr
+  268  ./configure --prefix=/usr
+  269  sudo apt-get install libavutil
+  270  history
+  271  clear
+  272  sudo apt-get install portaudio-2.0
+  273  sudo apt-get install libportaudio-dev
+  274  ./configure --prefix=/usr
+  275  cd ll
+  276  cd ..
+  277  ls
+  278  cd ..
+  279  ls
+  280  mv PortAudio/portaudio/ ./GUVCVIEW/guvcview-src-1.7.1/
+  281  mv v4l-utils-0.8.9/ ./GUVCVIEW/guvcview-src-1.7.1/
+  282  cd GUVCVIEW/guvcview-src-1.7.1/
+  283  ./configure --prefix=/usr
+  284  man PKG_CONFIG_PATH
+  285  locate pkg-config
+  286  echo $PKG_CONFIG_PATH
+  287  sudo apt-get install libportaudio-dev
+  288  sudo apt-get install libportaudio19-dev
+  289  sudo apt-get install portaudio19-dev
+  290  ./configure --prefix=/usr
+  291  sudo apt-get install libavcodec-dev
+  292  ./configure --prefix=/usr
+  293  sudo apt-get install libv4l2-dev
+  294  sudo apt-get install libv4l-dev
+  295  ./configure --prefix=/usr
+  296  ls
+  297  Make
+  298  make
+  299  ls
+  300  vi Makefile
+  301  cd ..
+  302  ls
+  303  make install
+  304  make install-sh
+  305  find guvcview
+  306  find guvcview.exe
+  307  cd ..
+  308  cd ~
+  309  find guvcview
+  310  find "guvcview"
+  311  cd *.exe
+  312  cd "*.exe"
+  313  find "*.exe"
+  314  grep -r "*.exe"
+  315  grep -r guvcview
+  316  ls
+  317  cd Documents
+  318  ls
+  319  cd GUVCVIEW/guvcview-src-1.7.1/
+  320  ls
+  321  cd src
+  322  ls
+  323  cd ..
+  324  make clean
+  325  cd src
+  326  ls
+  327  cat file_io.h
+  328  c
+  329  clear
+  330  ls
+  331  vi matroska.c
+  332  vi video.h
+  333  grep -r mainloop
+  334  vi video.c
+  335  vi video_filters.c
+  336  vi video_tab.c
+  337  cd ..
+  338  ls
+  339  cd guvcview-src-1.7.1/
+  340  ls
+  341  ./configure --prefix=/usr
+  342  make
+  343  ls guvcview
+  344  less guvcview
+  345  ls
+  346  cd src
+  347  ls
+  348  ./guvcview
+  349  ls
+  350  cd Documents/
+  351  ls
+  352  cd TheGIT/
+  353  ls
+  354  git init
+  355  git add README.md
+  356  cd ..
+  357  cd TheGIT/
+  358  ls
+  359  cd RogueSquadran/
+  360  ls
+  361  git remote add origin https://github.com/danig19/RogueSquadran.git
+  362  clear
+  363  ls
+  364  git pull http://github.com/danig19/RogueSquadran
+  365  cd ..
+  366  ls
+  367  cd TheGIT/
+  368  ls
+  369  rm -r RogueSquadran/
+  370  ls
+  371  cd RogueSquadran/
+  372  ls
+  373  rm guvcview-src-1.7.1/
+  374  rm -r guvcview-src-1.7.1/
+  375  ls
+  376  touch README.md
+  377  git init
+  378  git add README.md
+  379  git commit -m "first commit"
+  380  git remote add origin https://github.com/danig19/RogueSquadran.git
+  381  git remote rm origin
+  382  git remote add origin https://github.com/danig19/RogueSquadran.git
+  383  git push -u origin master
+  384  git var -1
+  385  git var -l
+  386  git push -u origin master
+  387  git cat-file -p 
+  388  git cat-file -p "first commit"
+  389  exit
+  390  ls
+  391  cd Documents/
+  392  ls
+  393  cd GUVCVIEW
+  394  ls
+  395  cd ..
+  396  mkdir TheGIT
+  397  cd TheGIT
+  398  git clone https://github.com/danig19/RogueSquadran.git
+  399  cd ..
+  400  ls
+  401  pwd
+  402  cd TheGIT/
+  403  cp -r /home/fiora/Documents/GUVCVIEW/* ./
+  404  ls
+  405  cp -r ./guvcview-src-1.7.1 ./RogueSquadran/
+  406  cd RogueSquadran/
+  407  ls
+  408  cd guvcview-src-1.7.1/
+  409  ls
+  410  ./config prefix=/usr
+  411  ./configure prefix=/usr
+  412  make
+  413  ls
+  414  ls src
+  415  ./src/guvcview
+  416  make clean
+  417  git add *
+  418  git commit -am "FIRST COMMIT"
+  419  git push http://github.com/danig19/RogueSquadran
+  420  ls
+  421  git add *
+  422  ls
+  423  make clean
+  424  ./configure prefix=/usr
+  425  exti
+  426  ls
+  427  cd Documents/
+  428  ls
+  429  cd TheGIT
+  430  ls
+  431  cd RogueSquadran/
+  432  ls
+  433  git pull https://github.com/danig19/RogueSquadran guvcview
+  434  git update --user.email
+  435  git --help
+  436  git config --global user.email guirdani@msu.edu
+  437  ls
+  438  git pull https://github.com/danig19/RogueSquadran guvcview
+  439  git checkout -b guvcview
+  440  cd ..
+  441  ls
+  442  cd guvcview-src-1.7.1/
+  443  ls
+  444  git pull https://github.com/danig19/RogueSquadran guvcview
+  445  ls
+  446  cd ..
+  447  ls
+  448  cd guvcview-src-1.7.1/
+  449  git add *
+  450  git commit -m "all the horses and all the men"
+  451  git push https://github.com/danig19/RogueSquadran guvcview
+  452  git commit -m "all the horses and all the men"
+  453* git push 
+  454  git push https://github.com/danig19/RogueSquadran guvcview
+  455  ls
+  456  cd ..
+  457  ls
+  458  cd guvcview-src-1.7.1/
+  459  git push https://github.com/danig19/RogueSquadran.git guvcview
+  460  cd ..
+  461  ls
+  462  mkdir theOtherOne
+  463  cd TheGIT/
+  464  ls
+  465  history
+  466  git push https://github.com/danig19/RogueSquadran.git guvcview --force
+  467  git push https://github.com/danig19/RogueSquadran guvcview --force
+  468  ls
+  469  cd guvcview-src-1.7.1/
+  470  ls
+  471  cd ..
+  472  git add guvcview-src-1.7.1/
+  473  git commit -m "all the useful crap"
+  474* git push -u https://github.com/danig19/RogueSquadran guvcview
+  475  git push -u origin master
+  476  cd ..
+  477  ls
+  478  cd theOtherOne/
+  479  git clone https://github.com/danig19/RogueSquadran.git
+  480  ls
+  481  cd RogueSquadran
+  482  ls
+  483  cp /home/fiora/Documents/GUVCVIEW/ ./
+  484  cp -f /home/fiora/Documents/GUVCVIEW/ ./
+  485  cp -r /home/fiora/Documents/GUVCVIEW/ ./
+  486  ls
+  487  cd GUVCVIEW/
+  488  ls
+  489  cd guvcview-src-1.7.1/
+  490  ls
+  491  ./configure --prefix=/usr
+  492  make
+  493  cd ..
+  494  ls
+  495  cd guvcview-src-1.7.1/
+  496  make clean
+  497  cd ..
+  498  ls
+  499  cd ..
+  500  ls
+  501  git add GUVCVIEW/
+  502  git commit -m "all of it"
+  503  git push origin master
+  504  ls
+  505  cd GUVCVIEW/
+  506  cd guvcview-src-1.7.1/
+  507  ls
+  508  cd src
+  509  ./configure --prefix=/usr
+  510  cd ..
+  511  ls
+  512  ./configure --prefix=/usr
+  513  ls
+  514  cd src
+  515  make
+  516  ls
+  517  guvcview
+  518  cd ..
+  519  history > hist.txt

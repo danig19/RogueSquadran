@@ -1,0 +1,65 @@
+#!/bin/sh
+
+# Check for Eurostile font.
+# It is not strictly needed, but without it some examples may misplace text
+eurostile=`find /usr/share/fonts -name "Eurosti.???"`
+if [ X"$eurostile" != X ] ; then
+  echo Found Eurostile font. Good
+else
+  echo Eurostile font was not found /usr/share/fonts.
+  echo It is not strictly needed, but without it the demo may misplace text
+  echo Please copy fonts/Eurosti.ttf to /usr/share/fonts/truetype/ or similar directory
+  echo You may have to use sudo like this : sudo cp fonts/Eurosti.ttf /usr/share/fonts/truetype/
+  exit
+fi
+
+list_req()
+{
+  echo 'If you are using a fresh Ubuntu installation, it is recommended'
+  echo 'and perhaps necessary that you execute the following command:'
+  echo
+  echo '  $ sudo apt-get install build-essential automake autoconf libtool g++ pkg-config libgtk-3-dev gtk+-3.0 libsdl1.2-dev tcl-dev libosmesa6-dev gstreamer-tools libgstreamer0.10-dev'
+  echo
+  echo 'Snowmix will depend on the packages listed'
+  echo
+}
+for prog in aclocal autoconf libtoolize automake ; do
+  which $prog
+  if [ X$? != X0 ]
+  then
+    echo 'ERROR : '$prog' not found'
+    list_req
+    exit 1
+  fi
+done
+
+aclocal
+autoconf
+libtoolize --force
+automake --add-missing
+if [ -s VERSION ] ; then
+  head -1 VERSION | awk '{ printf("#define SNOWMIX_VERSION \"%s\"\n", $0);}' >src/version.h
+fi
+
+system=`uname -s`
+if [ $system = Linux ] ; then
+  for pkg in tcl8.5 tk8.5 bwidget ; do
+    echo "Checking for package $pkg : \c"
+    installed=`dpkg --get-selections $pkg`
+    if [ "X$installed" = X ] ; then
+      echo " Not installed."
+      echo "Warning. Missing $pkg. You need to install $pkg to run snowcub.tcl"
+      echo "You can install $pkg by executing the following command later or install now"
+      echo "  sudo apt-get install $pkg"
+      echo "Do you wish to install $pkg now ? (Y/N) \c"
+      read reply
+      if [ "$reply" = Y -o "$reply" = y ] ; then
+        sudo apt-get install $pkg
+      fi
+    else
+      echo "installed."
+    fi
+  done
+fi
+
+echo "Now you can run ./configure to create Makefiles and the cd into src and run make"

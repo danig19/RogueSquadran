@@ -1,0 +1,546 @@
+# Sapphire Scene Settings
+# Copyright by Peter Maersk-Moller 2012-2013 - All rights reserved
+# verbose
+require version 0.4.1
+
+# Functions in libscenes.tcl
+#
+# SceneCreate { name scene_id x y width height shape }	: Create a new scene
+# ScenesList	: List available scenes as scene IDs
+# SceneList	: List info for individual scene
+# SetSceneState	: Set the state of a scene as active/not active
+# AddBackground2Scene : Add background image to scene
+# AddFrame2Scene: Add a frame definition to a scene
+# UpdateScenes  : To be called for every main mixer frame to draw active scene with frame(s)
+# Back2Front4Frame : Fade/shift front source and back source up and switch source
+# SetSource4Frame : Set a feed/image/graph/radar source for a frame (front or back)
+# GetFadeSpeed  : returns steps and delta for fade speed
+# SetFrameActive: Set the active state for a frame
+# AddTextClock2Scene { scene_id clock_id clock_mode } // Add/set clock for scene
+# TextClockToggle4Scene { $scene_id clock_id }
+# AddDisplayText2Scene { $scene_id text_id1 ..... }
+# SetColor4Clock4Scene { scene_id clock_id text red green blue alpha }
+#
+command create libscenes.tcl
+  set scene(scenes) ""
+  set scene(maxwidth) $system(width)
+  set scene(maxheight) $system(height)
+  set scene(fadespeed,scene) 32
+  set scene(fadespeed,frame) 32
+
+  proc ScenesList {} {
+    global scene
+    return "\nmessage Scenes = $scene(scenes)\n"
+  }
+  proc SceneList { scene_id } {
+    global scene
+    if {![info exist scene(name,$scene_id)]} {
+      return "\nmessage Invalid scene_id\n"
+    }
+    set s "\nmessage Scene $scene_id active $scene(active,$scene_id) WxH $scene(width,$scene_id)x$scene(height,$scene_id) at 0,0 "
+    append s "name $scene(name,$scene_id)\n"
+    if {[info exist scene(back,image_id,$scene_id)]} {
+      append s "message - back : image $scene(back,image_id,$scene_id) "
+      append s "WxH $scene(back,width,$scene_id)x$scene(back,height,$scene_id) "
+      append s "at $scene(back,x,$scene_id),$scene(back,y,$scene_id) "
+      append s "shape $scene(back,shape_id,$scene_id) place "
+      append s "$scene(back,place_id,$scene_id)\n"
+    }
+    foreach frame_id $scene(frames,$scene_id) {
+      append s "message - frame $frame_id active "
+      append s "$scene(active,$scene_id,$frame_id) : "
+      append s "$scene(width,$scene_id,$frame_id)x"
+      append s "$scene(height,$scene_id,$frame_id) at "
+      append s "$scene(xoff,$scene_id,$frame_id),"
+      append s "$scene(yoff,$scene_id,$frame_id) source "
+      append s "$scene(source_front,$scene_id,$frame_id),"
+      append s "$scene(source_back,$scene_id,$frame_id) id "
+      append s "$scene(source_id_front,$scene_id,$frame_id),"
+      append s "$scene(source_id_back,$scene_id,$frame_id) shape "
+      append s "$scene(shape_front,$scene_id,$frame_id),"
+      append s "$scene(shape_back,$scene_id,$frame_id) place "
+      append s "$scene(place_front,$scene_id,$frame_id),"
+      append s "$scene(place_back,$scene_id,$frame_id)\n"
+    }
+    foreach clock_id $scene(clocks,$scene_id) {
+      #set clock_id $scene(clock_id,$scene_id)
+      append s "message - clock $clock_id active $scene(clock_mode,$scene_id,$clock_id) : "
+      append s "at $scene(clock_x,$scene_id,$clock_id),$scene(clock_y,$scene_id,$clock_id) text "
+      append s "$scene(clock_red,$scene_id,$clock_id) $scene(clock_green,$scene_id,$clock_id) "
+      append s "$scene(clock_blue,$scene_id,$clock_id) $scene(clock_alpha,$scene_id,$clock_id) bg "
+      append s "$scene(clock_bg_red,$scene_id,$clock_id) $scene(clock_bg_green,$scene_id,$clock_id) "
+      append s "$scene(clock_bg_blue,$scene_id,$clock_id) $scene(clock_bg_alpha,$scene_id,$clock_id)\n"
+    }
+    return "$s\nmessage \n"
+  }
+ 
+  proc SceneCreate { name scene_id x y width height shape} {
+    global scene
+    if {[string match "-" $width]} { set width $scene(maxwidth) }
+    if {[string match "-" $height]} { set height $scene(maxheight) }
+    if {[info exist scene(name,$scene_id)] || $width < 1 || $height < 1 || $shape < 0} {
+      return "\nmessage Create scene failed\n"
+    }
+    lappend scene(scenes) $scene_id
+    set scene(name,$scene_id) "$name"
+    set scene(width,$scene_id) [expr round($width)]
+    set scene(height,$scene_id) [expr round($height)]
+    set scene(x,$scene_id) [expr round($x)]
+    set scene(y,$scene_id) [expr round($y)]
+    #set scene(background_shape,$scene_id) $shape
+    set scene(frames,$scene_id) ""
+    set scene(active,$scene_id) 0
+    set scene(clocks,$scene_id) ""
+    set scene(display_text,$scene_id) ""
+    return "\nmessage SceneCreate $scene_id $name\n"
+  }
+
+  proc SetTextClock4Scene { scene_id clock_id x y } {
+    global scene
+    if {![info exist scene(name,$scene_id)]} {
+      return "\nmessage AddTextClock2Scene failed\n"
+    }
+    set scene(clock_x,$scene_id,$clock_id) $x
+    set scene(clock_y,$scene_id,$clock_id) $y
+  }
+
+  proc TextClockToggle4Scene { scene_id clock_id } {
+    global scene
+    if {![info exist scene(name,$scene_id)]} {
+      return "\nmessage AddTextClock2Scene failed\n"
+    }
+    if {[info exist scene(clock_mode,$scene_id,$clock_id)]} {
+      if {$scene(clock_mode,$scene_id,$clock_id)} {
+        set scene(clock_mode,$scene_id,$clock_id) 0
+      } else {
+        set scene(clock_mode,$scene_id,$clock_id) 1
+      }
+    } else { return "\nmessage Clock $clock_id does not exist for scene $scene_id\n" }
+    return "\nmessage Clock toggled to $scene(clock_mode,$scene_id,$clock_id)\n"
+  }
+
+  proc AddTextClock2Scene { scene_id clock_id clock_mode } {
+    global scene
+    if {![info exist scene(name,$scene_id)]} {
+      return "\nmessage AddTextClock2Scene failed\n"
+    }
+    lappend scene(clocks,$scene_id) $clock_id
+    set scene(clock_mode,$scene_id,$clock_id) $clock_mode
+    set scene(clock_x,$scene_id,$clock_id) 0
+    set scene(clock_y,$scene_id,$clock_id) 0
+    set scene(clock_red,$scene_id,$clock_id) 1
+    set scene(clock_green,$scene_id,$clock_id) 1
+    set scene(clock_blue,$scene_id,$clock_id) 1
+    set scene(clock_alpha,$scene_id,$clock_id) 1
+    set scene(clock_bg_red,$scene_id,$clock_id) 0
+    set scene(clock_bg_green,$scene_id,$clock_id) 0
+    set scene(clock_bg_blue,$scene_id,$clock_id) 0
+    set scene(clock_bg_alpha,$scene_id,$clock_id) 1
+    return
+  }
+
+  proc SetColor4Clock4Scene { scene_id clock_id text red green blue alpha } {
+    if {![info exist scene(name,$scene_id)]} {
+      return "\nmessage AddTextClock2Scene failed. No such scene $clock_id\n"
+    }
+    if {![info exist scene(clock_mode,$scene_id,$clock_id)]} {
+      return "\nmessage AddTextClock2Scene failed. No such clock $clock_id\n"
+    }
+    if {$text} {
+      set scene(clock_red,$scene_id,$clock_id) $red
+      set scene(clock_green,$scene_id,$clock_id) $green
+      set scene(clock_blue,$scene_id,$clock_id) $blue
+      set scene(clock_alpha,$scene_id,$clock_id) $alpha
+    } else {
+      set scene(clock_bg_red,$scene_id,$clock_id) $red
+      set scene(clock_bg_green,$scene_id,$clock_id) $green
+      set scene(clock_bg_blue,$scene_id,$clock_id) $blue
+      set scene(clock_bg_alpha,$scene_id,$clock_id) $alpha
+    }
+  }
+
+  # Set scene active, to be displayed
+  # Valid values for active are 0 and 1
+  proc SetSceneState { scene_id active } {
+    global scene
+    set s "\n"
+    if {![info exist scene(name,$scene_id)]} {
+      return "\nmessage SetSceneState failed\n"
+    }
+    if { $active > 0 } {
+      foreach id $scene(scenes)  {
+    	if {$scene(active,$id) > 0} { set scene(active,$id) 0 }
+      }
+    }
+    if {$active > 0} {
+      foreach clock_id $scene(clocks,$scene_id) {
+        append s [TextClockPlace $clock_id $scene(clock_x,$scene_id,$clock_id) $scene(clock_y,$scene_id,$clock_id)]
+      }
+    }
+      
+    set scene(active,$scene_id) $active
+    append s "\nmessage scene $scene_id state set $active\n"
+    return "$s\n"
+  }
+
+  proc Setbackground4Scene { scene_id image_id } {
+    global scene image
+    if {![info exist scene(name,$scene_id)]} {
+      return "\nmessage Set background for scene failed : no such scene\n"
+    }
+    if {[string match "-" $image_id]} {
+      set scene(back,image_id,$scene_id) $image_id
+      return "\nmessage Background for scene $scene_id disabled\n"
+    }
+    if {![info exist image(name,$image_id)]} {
+      return "\nmessage Set background for scene failed : no such image\n"
+    }
+    set s "\n"
+    append s [AddBackground2Scene $scene_id $image_id $scene(back,shape_id,$scene_id) $scene(back,place_id,$scene_id) $image(width,$image_id) $image(height,$image_id)]
+    return "$s\nmessage Background sat for scene $scene_id"
+  }
+      
+
+  proc AddBackground2Scene { scene_id image_id shape_id place_id image_width image_height } {
+    global scene
+    if {![info exist scene(name,$scene_id)]} {
+      return "\nmessage Add background to scene failed\n"
+    }
+    set s "\n"
+    set scene(back,image_id,$scene_id) $image_id
+    set scene(back,shape_id,$scene_id) $shape_id
+    set scene(back,place_id,$scene_id) $place_id
+    set scene(back,width,$scene_id) $image_width
+    set scene(back,height,$scene_id) $image_height
+    set xoff [expr $image_width/2.0]
+    set yoff [expr $image_height/2.0]
+    set scale_x [expr double($scene(width,$scene_id))/$image_width]
+    set scale_y [expr double($scene(height,$scene_id))/$image_height]
+    append s "shape add $shape_id to be deleted\n"
+    append s "shape add $shape_id  \n"
+    append s "shape add $shape_id Scene $scene_id background shape\n"
+    append s "shape inshape $shape_id 2\n"
+    append s "shape clip $shape_id\n"
+    append s "shape newpath $shape_id\n"
+    append s "shape image $shape_id $image_id -$xoff -$yoff $scale_x $scale_y\n"
+    append s "shape paint $shape_id 1\n"
+    set x [expr $scene(x,$scene_id) + $scene(width,$scene_id)/2.0]
+    set y [expr $scene(y,$scene_id) + $scene(height,$scene_id)/2.0]
+    append s "shape place $place_id $shape_id $x $y $scene(width,$scene_id) $scene(height,$scene_id) \n"
+    set scene(back,x,$scene_id) $x
+    set scene(back,y,$scene_id) $y
+
+    return "$s\n"
+  }
+
+  proc PlaceFrame4Scene { scene_id frame_id xoff yoff width height } {
+    global scene
+    if {![info exist scene(name,$scene_id)] || ![info exist scene(xoff,$scene_id,$frame_id)]} {
+      return "\nmessage PlaceFrame4Scene failed\n"
+    }
+    set s "\n"
+    set scene(xoff,$scene_id,$frame_id) $xoff
+    set scene(yoff,$scene_id,$frame_id) $yoff
+    set scene(width,$scene_id,$frame_id) $width
+    set scene(height,$scene_id,$frame_id) $height
+    if {![string match "\-" $scene(source_front,$scene_id,$frame_id)]} {
+      append s [SetSource4Frame $scene_id $frame_id $scene(source_front,$scene_id,$frame_id) $scene(source_id_front,$scene_id,$frame_id) 1 $scene(active,$scene_id,$frame_id)]
+    }
+    if {![string match "\-" $scene(source_back,$scene_id,$frame_id)]} {
+      append s [SetSource4Frame $scene_id $frame_id $scene(source_back,$scene_id,$frame_id) $scene(source_id_back,$scene_id,$frame_id) 0 0]
+    }
+    append s "message PlaceFrame4Scene done\n"
+    return "$s\n"
+  }
+
+  proc AddFrame2Scene { scene_id frame_id xoff yoff width height shape_front shape_back place_front place_back } {
+    global scene
+    set s "\n"
+    if {[string match "-" $width]} { set width $scene(maxwidth) }
+    if {[string match "-" $height]} { set height $scene(maxheight) }
+    if {![info exist scene(name,$scene_id)] || $width < 1 || $height < 1} {
+      return "\nmessage Add frame to scene failed\n"
+    }
+    lappend scene(frames,$scene_id) $frame_id
+    set scene(active,$scene_id,$frame_id) 0
+    set scene(xoff,$scene_id,$frame_id) $xoff
+    set scene(yoff,$scene_id,$frame_id) $yoff
+    set scene(width,$scene_id,$frame_id) $width
+    set scene(height,$scene_id,$frame_id) $height
+    set scene(shape_front,$scene_id,$frame_id) $shape_front
+    set scene(shape_back,$scene_id,$frame_id) $shape_back
+    set scene(place_front,$scene_id,$frame_id) $place_front
+    set scene(place_back,$scene_id,$frame_id) $place_back
+    set scene(source_front,$scene_id,$frame_id) -
+    set scene(source_id_front,$scene_id,$frame_id) -1
+    set scene(source_back,$scene_id,$frame_id) -
+    set scene(source_id_back,$scene_id,$frame_id) -1
+    set scene(valign,$scene_id,$frame_id) l
+    set scene(halign,$scene_id,$frame_id) t
+    append s "shape add $shape_front to be deleted\n"
+    append s "shape add $shape_front\n"
+    append s "shape add $shape_back to be deleted\n"
+    append s "shape add $shape_back\n"
+    append s "shape place $place_front 1 0 0 1 1\n"
+    append s "shape place $place_front\n"
+    append s "shape place $place_back 1 0 0 1 1\n"
+    append s "shape place $place_back\n"
+    return "$s\n"
+  }
+
+  proc UpdateScenes {} {
+    global scene
+    set s "\n"
+    set shape_place_list ""
+    set update_commands ""
+    foreach scene_id $scene(scenes) {
+      if {$scene(active,$scene_id) != 0} {
+        if {[info exist scene(back,place_id,$scene_id)] && ![string match "-" $scene(back,image_id,$scene_id)]} {
+          append shape_place_list "$scene(back,place_id,$scene_id) "
+        }
+        foreach frame_id $scene(frames,$scene_id) {
+          if { $scene(active,$scene_id,$frame_id) != 0 } {
+            append shape_place_list "$scene(place_back,$scene_id,$frame_id) "
+            append shape_place_list "$scene(place_front,$scene_id,$frame_id) "
+            if { $scene(active,$scene_id,$frame_id) < 0 } {
+              incr scene(active,$scene_id,$frame_id)
+            }
+            if {[string match graph $scene(source_front,$scene_id,$frame_id)]} {
+              append update_commands "shape overlay $shape_place_list\n"
+              append update_commands [GraphOverlay $scene(source_id_front,$scene_id,$frame_id) $scene(xoff,$scene_id,$frame_id) $scene(yoff,$scene_id,$frame_id) $scene(width,$scene_id,$frame_id) $scene(height,$scene_id,$frame_id)]
+              set shape_place_list ""
+            } elseif {[string match radar $scene(source_front,$scene_id,$frame_id)]} {
+              append update_commands "shape overlay $shape_place_list\n"
+              append update_commands [RadarOverlay $scene(source_id_front,$scene_id,$frame_id) $scene(xoff,$scene_id,$frame_id) $scene(yoff,$scene_id,$frame_id) $scene(width,$scene_id,$frame_id) $scene(height,$scene_id,$frame_id)]
+              set shape_place_list ""
+            }
+          }
+        }
+        if {$scene(active,$scene_id) < 0} { incr scene(active,$scene_id) }
+      }
+    }
+    if {[string length $shape_place_list] > 0} {
+      append update_commands "shape overlay $shape_place_list\n"
+    }
+    if {[string length $update_commands] > 0} {
+      append s $update_commands
+    }
+    foreach scene_id $scene(scenes) {
+      if {$scene(active,$scene_id) != 0} {
+        if {[string length $scene(display_text,$scene_id)] > 0} {
+          append s "text overlay $scene(display_text,$scene_id)\n"
+        }
+      }
+    }
+    foreach scene_id $scene(scenes) {
+      if {$scene(active,$scene_id) > 0} {
+        foreach clock_id $scene(clocks,$scene_id) {
+          if {$scene(clock_mode,$scene_id,$clock_id) > 0} {
+            append s [TextClockUpdate $clock_id]
+          }
+        }
+      }
+    }
+    return "$s\n"
+  }
+
+  proc GetFadeSpeed { scene_id frame_id } {
+    global scene
+    if {[info exist scene(fadespeed,frame,$scene_id,$frame_id)]} {
+      set speed $scene(fadespeed,frame,$scene_id,$frame_id)
+    } elseif {[info exist scene(fadespeed,frame,$scene_id)]} {
+      set speed $scene(fadespeed,frame,$scene_id)
+    } elseif {[info exist scene(fadespeed,frame)]} {
+      set speed $scene(fadespeed,frame)
+    } elseif {[info exist scene(fadespeed,scene)]} {
+      set speed $scene(fadespeed,scene)
+    } else { set speed 32 }
+    if { $speed < 2 } { set speed 40 }
+    return "$speed [expr 1.0001/$speed]"
+  }
+
+  proc Back2Front4Frame { scene_id frame_id fade } {
+    global scene
+    if {![info exist scene(name,$scene_id)] || ![info exist scene(xoff,$scene_id,$frame_id)]} {
+      return "\nmessage Back2Front4Frame failed\n"
+    }
+    foreach name "place shape source source_id" {
+      set a $scene(${name}_front,$scene_id,$frame_id)
+      set scene(${name}_front,$scene_id,$frame_id) $scene(${name}_back,$scene_id,$frame_id)
+      set scene(${name}_back,$scene_id,$frame_id) $a
+    }
+    set s "\n"
+    if {$fade} {
+      set speedset [GetFadeSpeed $scene_id $frame_id]
+      set steps [lindex $speedset 0]
+      set delta [lindex $speedset 1]
+      append s "shape place move alpha $scene(place_front,$scene_id,$frame_id) $delta $steps\n"
+      append s "shape place move alpha $scene(place_back,$scene_id,$frame_id) -$delta $steps\n"
+    } else {
+      append s "shape place alpha $scene(place_front,$scene_id,$frame_id) 1\n"
+      append s "shape place alpha $scene(place_back,$scene_id,$frame_id) 0\n"
+    }
+    return "$s\message Back2Front4Frame $scene_id $frame_id\n"
+  }
+
+  proc SetFrameFade { scene_id frame_id fade } {
+    global scene
+    if {![info exist scene(active,$scene_id,$frame_id)]} {
+      return "\nmessage SetFrameFade failed\n"
+    }
+    set s "\n"
+    set speedset [GetFadeSpeed $scene_id $frame_id]
+    set steps [lindex $speedset 0]
+    set delta [lindex $speedset 1]
+    if {$fade} {
+      set scene(active,$scene_id,$frame_id) -$steps
+      append s "shape place move alpha $scene(place_front,$scene_id,$frame_id) -$delta $steps\n"
+      append s "shape place alpha $scene(place_back,$scene_id,$frame_id) 0\n"
+    } else {
+      if {$scene(active,$scene_id,$frame_id) != 1} {
+        append s "shape place alpha $scene(place_front,$scene_id,$frame_id) 0\n"
+      }
+      set scene(active,$scene_id,$frame_id) 1
+      append s "shape place move alpha $scene(place_front,$scene_id,$frame_id) $delta $steps\n"
+      append s "shape place alpha $scene(place_back,$scene_id,$frame_id) 0\n"
+    }
+    append s "message fade scene $scene_id frame $frame_id\n"
+    return "$s\n"
+  }
+
+  proc SetFrameActive { scene_id frame_id active } {
+    global scene
+    if {![info exist scene(active,$scene_id,$frame_id)]} {
+      return "\nmessage SetFrameActive failed\n"
+    }
+    set s "\n"
+    if {$active == 1} {
+      append s "shape place alpha $scene(place_front,$scene_id,$frame_id) 1\n"
+    }
+    set scene(active,$scene_id,$frame_id) $active
+    append s "message Set scene $scene_id frame $frame_id active $active\n"
+    return "$s\n"
+  }
+
+  proc AddDisplayText2Scene {scene_id args} {
+    global scene
+    if {![info exist scene(name,$scene_id)] || [llength $args] < 1} {
+      return "\nmessage Add display text to scene failed\n"
+    }
+    foreach text_id $args { lappend scene(display_text,$scene_id) $text_id }
+    return
+  }
+
+  proc SetSource4Frame { scene_id frame_id type feed_id front active args } {
+    global scene feed image graph radar
+    set s "\n"
+    if {![info exist scene(name,$scene_id)] ||
+        ![info exist scene(xoff,$scene_id,$frame_id)] ||
+        !([string match feed $type] || [string match image $type] ||
+          [string match graph $type] ||[string match radar $type]) ||
+        ([string match feed $type] && ![info exist feed(name,$feed_id)]) ||
+        ([string match graph $type] && ![info exist graph(name,$feed_id)]) ||
+        ([string match radar $type] && ![info exist radar(name,$feed_id)]) ||
+        ([string match image $type] && ![info exist image(name,$feed_id)])} {
+puts stderr "Failed for type $type $feed_id radar(name,$feed_id)"
+if {![info exist radar(name,$feed_id)]} {
+  puts stderr "No radar(name,$feed_id)"
+} else {
+ puts stderr "Radar Name ok"
+ puts stderr "Radar Name $radar(name,$feed_id)"
+}
+      return "\nmessage SetSource4Frame failed\n"
+    }
+    if {[llength $args] > 0} {
+      foreach align $args {
+        if {[string match "[lrc]" $align] [string length $align] == 1} { set scene(halign,$scene_id,$frame_id) $align }
+        elseif {[string match "[tbm]" $align] [string length $align] == 1} { set scene(valign,$scene_id,$frame_id) $align }
+      }
+    }
+    set width 0
+    set height 0
+    if {[string match feed $type]} {
+      if {[info exist feed(width,$feed_id)] && [info exist feed(width,$feed_id)]} {
+        set width $feed(width,$feed_id)
+        set height $feed(height,$feed_id)
+      }
+    } elseif {[string match image $type]} {
+      if {[info exist image(width,$feed_id)] && [info exist image(width,$feed_id)]} {
+        set width $image(width,$feed_id)
+        set height $image(height,$feed_id)
+      }
+    } elseif {[string match graph $type]} {
+      if {[info exist graph(width,$feed_id)] && [info exist graph(width,$feed_id)]} {
+        set width $graph(width,$feed_id)
+        set height $graph(height,$feed_id)
+      }
+    } elseif {[string match radar $type]} {
+      if {[info exist radar(width,$feed_id)] && [info exist radar(width,$feed_id)]} {
+        set width $radar(width,$feed_id)
+        set height $radar(height,$feed_id)
+      }
+    }
+    if {!$width || !$height} {
+      return "\nmessage Invalid source\n"
+    }
+    set scale_x [expr double($scene(width,$scene_id,$frame_id)) / $width]
+    set scale_y [expr double($scene(height,$scene_id,$frame_id)) / $height]
+    #if { $scale_x > $scale_y } { set scale_y $scale_x } else { set scale_x $scale_y }
+    if {[string match feed $type]} {
+      set parx [expr double($feed(parx,$feed_id))]
+      set pary [expr double($feed(pary,$feed_id))]
+    } else {
+      set parx 1
+      set pary 1
+    }
+    if {$parx != $pary} {
+      set scale_y [expr $scale_y * $pary / $parx]
+    }
+    set xoff [expr -round($width/2)]
+    set yoff [expr -round(double($parx)/$pary*$height/2)]
+    if { $front == 1 } {
+      set shape_place place_front
+      set shape $scene(shape_front,$scene_id,$frame_id)
+      set order front
+      set alpha 1
+      set scene(source_front,$scene_id,$frame_id) $type
+      set scene(source_id_front,$scene_id,$frame_id) $feed_id
+      SetFrameActive $scene_id $frame_id $active
+    } else {
+      set shape_place place_back
+      set shape $scene(shape_back,$scene_id,$frame_id)
+      set order back
+      set alpha 0
+      set scene(source_back,$scene_id,$frame_id) $type
+      set scene(source_id_back,$scene_id,$frame_id) $feed_id
+    }
+    #append s "shape add $shape to be deleted\n"
+    #append s "shape add $shape\n"
+    append s "shape add $shape Scene $scene_id frame $frame_id $order shape\n"
+    append s "shape inshape $shape 2\n"
+    append s "shape clip $shape\n"
+    append s "shape newpath $shape\n"
+    if {[string match feed $type] || [string match image $type]} {
+      append s "shape $type $shape $feed_id $xoff $yoff $scale_x $scale_y\n"
+      append s "shape paint $shape 1\n"
+    } elseif {[string match graph $type]} {
+      if {[info exist graph(shape_id,$feed_id)]} {
+        append s "shape inshape $shape $graph(shape_id,$feed_id)\n"
+      }
+    } elseif {[string match radar $type]} {
+      if {[info exist radar(shape_id,$feed_id)]} {
+        append s "shape inshape $shape $radar(shape_id,$feed_id)\n"
+      }
+    }
+    # append s "message set place_x expr $scene(x,$id) + $scene(xoff,$scene_id,$frame_id)\n"
+    set place_x [expr $scene(x,$scene_id) + $scene(xoff,$scene_id,$frame_id) + $scene(width,$scene_id,$frame_id)/2]
+    set place_y [expr $scene(y,$scene_id) + $scene(yoff,$scene_id,$frame_id) + $scene(height,$scene_id,$frame_id)/2]
+    append s "shape place $scene($shape_place,$scene_id,$frame_id) $shape $place_x $place_y $scene(width,$scene_id,$frame_id) $scene(height,$scene_id,$frame_id)\n"
+    append s "shape place alpha $scene($shape_place,$scene_id,$frame_id) $alpha\n"
+    append s "message Scene $scene_id frame $frame_id feed $feed_id front $front active $active\n"
+    return "$s\n"
+  }
+
+command end
+
+tcl exec libscenes.tcl

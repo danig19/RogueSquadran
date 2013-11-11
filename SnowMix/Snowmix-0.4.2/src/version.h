@@ -1,0 +1,1 @@
+#define SNOWMIX_VERSION "0.4.2"

@@ -1,0 +1,46 @@
+
+Array index for video_clip()
+
+# proc GetShape
+shape,$id	= shape name
+shape_ops,$id	= # shape operation
+shape_max	= max shape id
+
+# Active Shape
+place_id		= id of placed shape
+shape_id		= shape id of placed shape
+place_x			= x
+place_y			= y
+place_offx		= x offset
+place_offy		= y offset
+place_rotate		= rotation
+place_scalex		= scale x
+place_scaley		= scale y
+place_alpha		= alpha
+
+# GetPlacedShapes
+shape_id,$id		= shape_id
+place_x,$id		= x
+place_y,$id		= y
+place_offx,$id		= offx
+place_offy,$id		= offy
+place_rotate,$id	= rotation
+place_scalex,$id	= scalex
+place_scaley,$id	= scaley
+place_alpha,$id		= alpha
+shape_place_max		= max place id
+
+source_type		= type of source
+source_type_id		= id of type of source
+source_offx		= source x offset
+source_offy		= source y offset
+source_scalex		= source scale x
+source_scaley		= source scale y
+placed_shape,place_shape= Place ID of selected shape
+combo_placed_shape	= Combobox for placed shape
+combo_shape_id		= Combobox for shape id for placed shape
+combo_clip_id		= Combobox for clip for shape
+combo_source_id		= Combobox for source for shape
+combo_pattern_id	= Combobox for pattern for shape
+active		= Active button : place
+peinfo

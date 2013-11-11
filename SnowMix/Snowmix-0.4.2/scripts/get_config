@@ -1,0 +1,19 @@
+#!/bin/sh
+tmpfile=/tmp/snowmix.tmp.$$
+port=9999
+ip=127.0.0.1
+echo feed list verbose | nc $ip $port >$tmpfile
+
+get_socket()
+{
+  awk 'BEGIN { feed=-1; socket="" }
+	/^STAT\: Feed ID / { feed=$4; }
+	/^STAT\:   Socket\: / { if (feed == feed_id) socket=$3; }
+	END { printf("%s\n", socket) }
+	' feed_id=$1 <$tmpfile
+}
+
+socket=`get_socket 1`
+echo $socket
+rm $tmpfile
+exit

@@ -1,0 +1,32 @@
+# Sapphire Clock Settings
+# Copyright by Peter Maersk-Moller 2012-2013 - All rights reserved
+# verbose
+require version 0.4.1
+
+tcl eval CreateTextClock Counter 1 640 580 10 10 19 1.5
+tcl eval SetTextClockAlpha 1 1
+tcl eval TextClockAddLabel 1 15 15 19 T-
+tcl eval SetTextClockBackground 1 0 0 0 0.55
+tcl eval CreateTextClock Counter2 2 740 974 16 16 11 1.11
+tcl eval TextClockAddLabel 2 21 21 11 T-
+tcl eval SetTextClockAlpha 2 1
+tcl eval SetTextClockBackground 2 0 0 0 1
+
+# Show counter (0=counter, 1=localtime)
+tcl eval TextClockLocaltime 1 0
+# Count down
+tcl eval TextClockDir 1 0
+tcl eval TextClockDir 2 0
+# start clock
+tcl eval TextClockRun 1 1
+tcl eval TextClockRun 2 1
+
+#command create ClockRate2Second
+#  tcl eval TextClockSecond
+#  next 23
+#  loop
+#command end
+#
+#command pop PreShow
+#command push PreShow ClockRate2Second
+#command push PreShow loop

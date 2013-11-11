@@ -1,0 +1,907 @@
+Version 0.4.2:
+
+	- The FD for reading idle image file for feeds was not closed after reading. The
+	  FD is now closed. This was not a bug, but rather a waste of ressources. Small
+	  optimization.
+
+	- All placed text that was overlayed, called the UpdateMove function for each frame
+	  to change any parameters that needed changed for animation purposes. This is now
+	  skipped, if the placed text has no animation set. Small optimization.
+
+	- Optimizing parsing loop of *text* commands. Also parsing in the individual
+	  commands was overhauled. Optimization. The commands overhauled are:
+
+		text place align
+		text place alpha
+		text place backgr clip
+		text place backgr linpat
+		text place backgr move alpha
+		text place backgr move clip
+		text place backgr
+		text place clipabs
+		text place clip
+		text place coor
+		text place grow
+		text place move alpha
+		text place move clip
+		text place move scale 
+		text place move coor
+		text place move rotation
+		text place repeat move
+		text place rgb
+		text place rotation
+		text place scale
+		text place string
+		text place font
+		text place info
+		text place
+		text string concat
+		text string
+		text font available
+		text font
+		text help
+
+	- A list of **text** command will now report fail, if the *place id* does not
+          reference a placed text. The commands are:
+
+		text place align
+		text place alpha
+		text place backgr clip
+		text place backgr linpat
+		text place backgr move alpha
+		text place backgr move clip
+		text place backgr
+		text place clipabs
+		text place clip
+		text place coor
+		text place grow
+		text place move alpha
+		text place move clip
+		text place move scale 
+		text place move coor
+		text place move rotation
+		text place repeat move
+		text place rgb
+		text place rotation
+		text place scale
+		text place string
+		text place font
+		text place info
+
+	  Please note that a text placed referencing to string or font id that does not
+	  is NOT placed. This is a change in behaviour compared to earlier versions.
+
+	- Adding new command **shape scaletell**. The command is solely intended to be used
+	  for debugging purpose. The command place an entry in the specified shape macro that
+	  when overlayed will print the current scale of the graphic context to stderr. The
+	  syntax is:
+
+		shape scaletell <shape id>
+
+	- Adding command **text place backgr round** to provide round corners for text background.
+	  The radius of each corner must be specified. A radius of 0 is equal to a 90 degree coirner.
+	  The syntax is:
+
+		text place backgr round [<place id> <left top> <right top> <left bottom> <right bottom>]
+
+
+	- When using the command **text grow**, the width of the text was calculated as
+	  the width of the current shown string rather than the width of the full string.
+	  This would affect placement of text aligned for *center* or *right*. It would
+	  also affect the size of the background, if enabled. This has now been changed
+	  so the width is calculated as the full string and not the current shown string.
+	  If the old behaviour is desired, the keyword variable must be added to the
+	  *grow* command as shown for the syntax below here:
+
+		text place grow <id no> <start len> [<delta grow> [variable]]
+
+	- When using the command **text font** to delete a font, a string was deleted instead
+	  This has now been fixed.
+
+	- The command **text help** was not listing that the command **text place backgr linpat**
+	  could be used without arguments. Fixed.
+
+	- The command **text place** now checks for existence of string and font before
+	  creating a placed text. The command will now return an error if string and/or
+	  font does not exist. The command will now also return an error, if it failed.
+	  Before it could fail silently, if memory was insufficient.
+
+	- The command **text string concat** would in most cases core dump. This
+	  is a bug and has now been fixed. Further more the command will add a space
+	  between strings concatenated.
+
+	- Adding the commands **shape source alphamul** and **shape source alphaadd**. The
+	  command is used to multiply a factor or add a constant to the current alpha level
+	  in a shape and the effect is inherited down, but not up. Unless the command is later
+	  followed by a command that uses the alpha level such as *shape source rgb* or
+	  *shape source rgba* and then later followed by a command such as *shape paint*,
+	  *shape fill*, *shape stroke* etc, the command will have no effect. The command can
+	  among other things be used in recursion to decrease or increase the alpha level.
+	  Alpha levels are always between 0 and 1 but the factor can be any valid value hold
+	  in a double. The syntax is
+
+		shape source alphaadd <shape id> <alpha constant>
+		shape source alphamul <shape id> <alpha factor>
+
+	- Adding the command **text place string** and **text place font**. The command
+	  can be used to change the string id or font id for a placed text. The syntax is:
+
+		text place string [<place id> <string id>]
+		text place font [<place id> <font id>]
+
+	- The command **shape list** was not listing the command *shape save*.
+	  This has now been fixed.
+
+	- The command **shape list** was not listing the command *shape restore*.
+	  This has now been fixed.
+
+	- The command **shape list** was not listing the command *shape recursion*.
+	  This has now been fixed.
+
+	- The command **shape list** listed command *shape rotation* as *shape scale*.
+	  This has now been fixed.
+
+	- The command **shape list** was not listing the commands *stroke preserve*
+	  and *fill preserve* correctly. This has now been fixed.
+
+	- The command **shape source rgb** was in verbose mode listing it created a shape
+	  entry named *shape source rgba*. Likewise was the command **shape source** listing
+	  it created an entry named *shape source rgb*. This has now been fixed.
+
+	- The command *shape help* did not list the syntax for the command *shape rectangle*.
+	  This has now been fixed. The syntax is:
+
+		shape rectangle <shape id> <x> <y> <width> <height>
+
+	- The command **shape recursion** would with *shape verbose* larger than 0, print the
+	  word *RECURSION* as part of the information. This has now been changed to *recursion*.
+
+	- The command **shape line width** would with *shape verbose* larger than 0, print the
+	  word *width* as part of the information. This has now been changed to *line width*.
+
+	- The command **shape inshape** would with *shape verbose* larger than 0, print the
+	  word *shape* as part of the information. This has now been changed to *inshape*.
+
+	- Adding the command **shape arcrel_cw** and **shape arcrel_ccw* for drawing arcs
+	  relative to the current position of the graphic context. The command
+	  will draw an arc at Cairo Graphic context's current position added the parameters
+	  *x* and *y*. The syntax are:
+
+		shape arcrel_cw <shape id> <x> <y> <radius> <angle from> <angle to>
+		shape arcrel_ccw <shape id> <x> <y> <radius> <angle from> <angle to>
+
+	- The command **shape arc_ccw* was not parsed correctly making the command
+	  unusable. This has now been fixed.
+
+	- Optimizing the parsing of **feed** commands. Removing unnecessary strlen
+	  and reordering parsing order.
+
+	- The output of the command *feed list* and feed list verbose* has been
+	  changed to be in line with the rest of Snowmix. Also for this command, the
+	  output the string "MSG:" was changed to "STAT:" and the last line printed
+	  for both commands is the string "STAT: " plus a newline.
+
+	- The command *feed info* will now also list how many feeds can be created in total.
+
+	- The command *feed add* without parameters will now list the created
+	  feeds inline with other add commands in Snowmix. The command
+	  *feed help* has been updated to reflect the added syntax.
+
+	- The command *shape list help* was listing incorrect and incomplete syntax
+	  for the commands *shape place coor*, *shape place offset*, *shape place rgb*,
+	  *shape place rotation*, *shape place scale* and *shape place shape*. This
+	  has now been fixed.
+
+	- The following commands deleted an entry instead of moving it. This
+	  is a bug that has now been fixed.
+
+		shape moveentry <shape id> first N
+		shape moveentry <shape id> last N
+
+	  where N is a positive integer greater than 0.
+
+	- It will now be reported on stderr by the main_poller in main.cpp if
+	  frame processing is lagging. So far the code is disabled. Fills console
+	  on slower systems.
+
+	- Command system info will now also report the number of open control connections.
+
+	- Command system info will now also report the control connection port number.
+
+	- Command system info will now also report the number of lagged frames, but the code to
+	  count it is not yet enabled.
+
+	- Adding "animation" command to audio feed volume. When the command is given,
+	  the volume for all channels in the feed will be added \<delta volume> at
+	  frame rate a number of times set by \<delta steps>. The syntax is
+
+		audio feed move volume [<feed id> <delta volume> <delta steps>]
+
+	  Audio volumes are limited to values between 0 and MAX_VOLUME_FLOAT
+	  defined in audio_util.h to 4.0. A volume of 1.0 means unchanged level.
+
+	- Adding "animation" command to audio mixer volume. When the command is given,
+	  the volume for all channels in the mixer will be added \<delta volume> at
+	  frame rate a number of times set by \<delta steps>. The syntax is
+
+		audio mixer move volume [<mixer id> <delta volume> <delta steps>]
+		audio mixer source move volume [<mixer id> <source_no> <delta volume> <delta steps>]
+
+	- Adding "animation" command to audio sink volume. When the command is given,
+	  the volume for all channels in the sink will be added \<delta volume> at
+	  frame rate a number of times set by \<delta steps>. The syntax is
+
+		audio sink move volume [<sink id> <delta volume> <delta steps>]
+
+	- Changing max audio feeds in audio_feed.h from 10 to 20
+
+	- Deleting a pattern by issuing the command **shape pattern add \<pattern id>**
+	  deleted a shape rather than a pattern. This is now fixed. This is a bug fix.
+
+Version 0.4.1
+
+	- Adding support for complex graphics drawing, clipping, patterns, gradients
+	  and masking using graphic primitives through 46 new shapes command and
+	  14 new shape place commands. The commands are listed in the Release
+	  Note.
+
+	- Adding commands "text overlay" and "image overlay". These are identical
+	  to the commands "overlay text" and "overlay image" respectively except
+	  they are moved to the class CTextItem and CVideoImage. This enables
+	  text overlay and image overlay to be executed as a result of a tcl
+	  eval or tcl exec return result. The old commands will remain in the
+	  version 0.4.x, but are considered deprecated and will be removed in
+	  version 0.5.0. The new commands will return an error if not called
+	  inside the "overlay pre" and "overlay finish" or a command from
+	  inside these recursively. Ie. you can not execute an overlay command
+	  manually from a control connection as you always are in the wrong
+	  time window. Only the overlay pre and finish commands are executed
+	  in the right time window where a frame to overlay will present.
+
+	- Execution of defined commands was done by calling the command parse with
+	  the controller connection set to NULL. This prohibited a command macro
+	  from writing to the control connection. This has now changed, so output will
+	  go to the control connection giving the command. The execution
+	  of commands defined inside the "overlay pre" and "overlay finish" are still
+	  parsed with the controller connection set to NULL preventing possibly flodding
+	  the main control connection (usually stderr) with messages. However some commands
+	  may still fail and possibly writing to stderr.
+
+	- Changing output of command "message". Now it writes as show below.
+
+		MSG: ..........
+
+	  Furthermore, instead of writing the message to stderr, it now writes
+	  to the controller connection issuing the command instead.
+
+	- Adding command "messagef". It is similar to the message command except
+	  it adds the current frame number. The syntax is
+
+		messagef <the message>
+
+	  The output will look like this where the current frame count is 1324:
+
+		MSG: <1324> ......
+
+	- Adding command "text place clipabs" to provide a fixed clipping window
+	  for text and possibly its background. The clipping coordinates and size
+	  is absolute disregarding where the text is placed. The syntax is
+
+		text place clipabs [<place id> <clip x> <clip y> <clip width> <clip height>]
+
+	- The command "text place clip" will now return an error if the text place
+	  id indicated does not exist. This is a bug fix.
+
+	- Calling "overlay image" through "overlay finish" or "overlay pre" when
+	  no image was loaded caused seg fault in OverlayImage in video_mixer.cpp.
+	  This is a bug fix.
+
+	- Adding command "image write" to write out in raw rgba format an image already
+	  loaded. This is useful to create dead-images for the feeds as these
+	  are required to be in the rgba format. The syntax is
+
+		image write <image id> <file name>
+
+	  The command is not recommended used for live video mixing as writing
+	  to a file system may delay or block the main video loop of Snowmix.
+
+	- Commands created with name ending with ".tcl" case insensitive are now
+	  not checked and should not be executed as ordinary snowmix command. They
+	  should only be executed using the command "tcl exec" command. The changed
+	  is made to avoid a lot of false error messages from Snowmix when trying
+	  to identify break and jump points as if the command was a snowmix command
+	  and not a tcl script. Commands with name ending in ".tcl" are reserved
+	  for tcl script.
+
+	- Adding version and number of free and inuse outbuffer information to
+	  command system info. Fixing display of pixel format error.
+
+	- Adding information to system info whether or not Video shapes has been
+	  loaded.
+
+	- Adding inversion for audio mixer source. If enabled, the source will be
+	  inverted before used in mixer. The command has the follwoing syntax:
+
+		audio mixer source invert <mixer id> <source id>
+
+	  The command will toggle the status of a boolean variable used to determine
+	  whether samples should be inverted or not. Issued once for a mixer source, the
+	  samples will be inverted. Used twice on the same mixer and same source,
+	  the samples will not be inverted, which is the default state. The command
+
+		audio mixer source
+
+	  will list whether or not samples will be inverted using the word *invert* for
+	  when samples are to be inverted and the word *normal* for when the samples
+	  are not inverted.
+
+	- Changing the syntax for audio mixer start by adding the optional keyword soft.
+	  The syntax is now:
+
+		audio mixer start [[soft ]<mixer id>]
+
+	  The functionality was already in the code since 0.4.0. As this syntax change
+	  is an extension rather than a change of the reserved word commands, this
+	  does not prompt the need for a change of the major version number.
+
+	- New "system host allow" to limit access to connect to Snowmix. If not
+	  present, only connections from 127.0.0.1 is allowed. If present then
+	  only connections from ip adresses specified is allowed. In the latter
+	  case, 127.0.0.1 will usually have to be added. The command has the
+	  following syntax:
+
+		system host allow [ <network> | <host> [ <network> | <host> [ ...]]]
+
+	  Host must be specified as a.b.c.d like 192.168.1.2
+	  Network must be specified as a.b.c.d/e like 192.168.1.0/24
+
+	- Command image place now also prints anchor coordinates.
+
+	- Fixing bug with alpha for virtual feed. The feed was not painted with alpha
+	  in OverlayFrame() in cairo_graphics when alpha < 1.0
+
+	- Timed commands was not executed if there was no process connected
+	  to read produced video output frames. This has now been fixed.
+
+	- Fixing missing and erronous entries for the command "help".
+
+	- Togle verbosity for m_controller in controller.cpp now reports verbosity on when
+	  toggled on.
+
+Version 0.4.0
+
+	- Adding audio mixing capabilities through the classes CAudioFeed, CAudioMixer and
+	  CAudioSink. The classes adds the following commands
+
+		audio feed add [<feed id> [<feed name>]]  // empty <feed name> deletes entry
+		audio feed add silence <feed id> <silence in ms>
+		audio feed channels [<feed id> <channels>]
+		audio feed ctr isaudio <feed id>
+		audio feed delay [<delay in ms>]
+		audio feed drop <feed id> <drop in ms>]
+		audio feed format [<feed id> (8 | 16 | 24 | 32 | 64) (signed | unsigned | float)]
+		audio feed info
+		audio feed mute [(on | off) <feed id>]
+		audio feed rate [<feed id> <rate>]
+		audio feed status
+		audio feed verbose [<verbose level>]
+		audio feed volume [<feed id> (- | <volume>) [(- | <volume> ...)]] // volume = 0..MAX_VOLUME
+		audio feed help
+
+		audio mixer add [<mixer id> [<mixer name>]]
+		audio mixer add silence <mixer id> <ms>
+		audio mixer drop <mixer id> <ms>
+		audio mixer channels [<mixer id> <channels>]
+		audio mixer mute [(on | off) <mixer id>]
+		audio mixer queue <mixer id>
+		audio mixer rate [<mixer id> <rate>]
+		audio mixer source [(feed|mixer) <mixer id> <source id>]
+		audio mixer source add silence <mixer id> <source no> <ms>
+		audio mixer source [map <mixer id> <source no>]
+		audio mixer source [maxdelay <mixer id> <source no> <ms>]
+		audio mixer source [mute (on|off) <mixer id> <source no>]
+		audio mixer source [volume <mixer id> <source no> (-|<volume>) [(-|<volume>) ...]]
+		audio mixer start [<mixer id>]
+		audio mixer stop [<mixer id>]
+		audio mixer verbose [<verbose level>]
+		audio mixer volume [<mixer id> (-|<volume>) [(-|<volume>) ...]] // volume = 0..MAX_VOLUME
+		audio mixer status
+		audio mixer help
+
+		audio sink add [<sink id> [<sink name>]]
+		audio sink add silence <sink id> <ms>
+		audio sink channels [<sink id> <channels>]
+		audio sink ctr isaudio <sink id> // set control channel to write out audio
+		audio sink drop <sink id> <ms>]
+		audio sink file <sink id> <file name>
+		audio sink format [<sink id> (8 | 16 | 24 | 32 | 64) (signed | unsigned | float) ]
+		audio sink mute [(on | off) <sink id>]
+		audio sink queue <sink id> 
+		audio sink queue maxdelay <sink id> <max delay in ms
+		audio sink rate [<sink id> <rate>]
+		audio sink source [(feed | mixer) <sink id> <source id>]
+		audio sink start [<sink id>]
+		audio sink status
+		audio sink stop [<sink id>]
+		audio sink verbose [<verbose level>]
+		audio sink volume [<sink id> <volume>] // volume = 0..255
+		audio sink help
+
+	  More information on how to use Snowmix for audio mixing is available in the Wiki at
+	  http://sourceforge.net/p/snowmix/wiki/Audio/
+
+
+	- Adding command 'overlay pre'. This command is similar to the command 'overlay finish'
+	  except the command set by this is called at frame rate before audio feeds, mixers and
+	  sinks are processed. This also means that the command set is executed whether or not
+	  a consumer of frames is connected to Snowmix. The latter is different from the command
+	  'overlay finish' since overlay finish is not called if there is no consumer of frames.
+	  The syntax for 'overlay pre' is
+
+		overlay pre <command name>
+
+	- Fixing command 'virtual feed add' to print created virtual feeds and their
+	  respective names
+
+	- Adding command 'system info'. Command will provide some system info. The syntax is
+
+		system info
+
+	- Adding command 'virtual feed matrix'. The syntax is:
+
+		virtual feed place matrix <feed id> <xx> <xy> <yx> <yy> <x0> <y0>
+
+	- Adding command 'image place matrix'. The command enable a transformation of
+	  the coordinate system. To find more information on coordinate transformation,
+	  please use Google to search for 'cairo matrix transformation'. While the matrix
+	  command support offset and scaling, these functions are best used by using the
+	  commands 'image place', 'image offset' and 'image scale'. However the matrix
+	  transformation also support skewing, which can not be done by other commands.
+	  The syntax is:
+
+		image place matrix <place id> <xx> <xy> <yx> <yy> <x0> <y0>
+
+	- Adding help text in video_image for command 'image help'.
+
+	- Setting allowable 'system frame rate to be between 1 and 100. MIN and
+	  MAX is set in controller.h as MIN_SYSTEM_FRAME_RATE and MAX_SYSTEM_FRAME_RATE
+
+	- The following reserved keywords (commands) has changed name
+
+		port		-> system control port
+		geometry	-> system geometry
+		frame rate	-> system frame rate
+		socket		-> system socket
+
+	- Fixing bug with 'image place' and 'image place coor' where the return value
+	  would be non zero reporting and error even though the command would be executed
+	  correct. Negative coordinates trigged the bug.
+
+	- Clock example in tcl was using %I as format for hour which produces a 2 digit
+	  number for hours. This is okay for 01..07 and 10..12, but 08 and 09 are seen
+	  as illegal octal numbers for the tcl command expr. Subsequently the clock
+	  would fail if hour or minutes or seconds equals 08 or 09. Fix is to use %l.
+	  Minutes and seconds fixed by replacing leading '0' with ''.
+
+Version 0.3.4
+
+	- Adding command 'image place image'. The command is intended to be used to change
+	  the image of an already placed image. The syntax is:
+
+		image place image [<place id> <image id>]
+
+	- Adding command 'image place offset'. The command will offset the placed image by
+	  <offset x> and <offset y> pixels. Because an image is rotated at the coordinates
+	  given with the command 'image place', 'image place coor' and 'image place align',
+	  offset is not included when calculating the rotation point. This have the effect
+	  that a placed image can be moved on a circle with the radius being
+	  squareroot(offset_x * offset_x + offset_y + offset_y). The syntax is:
+
+		image place offset <place id> <offset x> <offset y>
+
+	- Adding command 'image place clip'. Full clip is '0.0 1.0 0.0 1.0'. Clipping more
+	  can be '0.1 0.6 0.2 0.7' that will 10% in from left, 40% from right, 20% from top
+	  30% from bottom.
+
+		image place clip [<place id> [<clip left> <clip right> <clip top> <clip bottom>]]
+
+	- Adding command 'image place move clip' to add animation for clipping image. The syntax
+	  for the command is:
+
+		image place move clip [<id no> <delta left> <delta right> <delta top>
+			<delta bottom> <left steps> <right steps> <top steps> <bottom steps>]
+
+	- Adding command 'image place scale'. The command can be used to scale a placed
+	  image.  A scale value of 1.0 means no scaling. A scaling of 0.0 means no image
+	  will be displayed. The command alone without parameters list the scale of placed
+	  images. The syntax is:
+
+		image place scale [<place id> <scale x> <scale y>]
+
+	- Adding command 'image place move scale'.
+
+		image place move scale [<place id> <delta scale x> <delta scale y> <step x> <step y>]
+
+	- Adding command 'image place alpha'. The command can be used to change the alpha
+	  placed of a placed image. The command alone without parameters list the alpha
+	  of placed images. The syntax is:
+
+		image place alpha [<place id> <alpha>]
+
+	- Adding command 'image place move alpha'. The commands adds ability to automatically
+	  change the alpha by adding <delta alpha> repeated <delta steps> times. Alpha is
+	  kept betwen 0.0 and 1.0. The syntax is:
+
+		image place move alpha [<place id> <delta alpha> <delta steps>]
+
+	- Adding command 'image place rotation'. The command can be used to rotate a placed
+	  image.  The command alone without parameters list the rotation of placed images.
+	  The syntax is:
+
+		image place rotation [<place id> <rotation>]
+
+	- Adding command 'image place move rotation'. The commands adds ability to automatically
+	  change the rotation by adding <delta rotation> repeated <delta steps> times. Rotation
+	  is kept between 2PI and -2PI. The syntax is:
+
+		image place move rotation [<place id> <delta rotation> <delta steps>]
+
+
+	- Adding command 'image place coor' to change the coordinates, anchor and alignment
+	  of an image already placed. The syntax is:
+
+		image place coor [<place id> <x> <y> [ (nw | ne | se | sw | n | s | e | w )]
+		( left | center | right) ( top | middle | bottom) ]
+
+	- Adding command 'image place move coor' to add animation for the placement of an
+	  image already placed. The syntax is:
+
+		image place move coor [<place id> <delta x> <delta y>  <step_x> <step_y>]
+
+	- Changing syntax of command 'image place' to add anchor (n, s, e, w, ne, nw, se, sw). The
+	  command will create a place id if it doesn't exist.  The syntax is:
+
+		image place [<place id> [<image id> <x> <y> [(nw | ne | se | sw | n | s | e | w )]
+		( left | center | right) ( top | middle | bottom) ]
+
+	- Adding command 'image place align'. The command can be used to change the
+	  alignment of a placed image. The syntax is:
+
+		image place align [<place id> (left | center | right) (top | middle | bottom)]
+
+	- Adding command 'message'. This command will pront a message on stderr output.
+	  The syntax is:
+
+		message <some text>
+
+	- Adding extra printed information for the command 'image place'.
+
+	- Adding command 'text verbose'. The command will toggle verbose settings
+	  for class CVideoText and if set, will increase verbosity.
+
+	- Adding command 'image verbose'. The command will toggle verbose settings
+	  for class CVideoImage and if set, will increase verbosity.
+
+	- Renaming command 'help image' to 'image help' and moving 'image help'
+	  listing to class CVideoImage.
+
+	- Adding ParseCommand() to class CVideoImage, moving set_image_load() and
+	  set_image_place() to class CVideoImage. Optimize parsing for image in
+	  class CController and class CVideoImage.
+
+	- Fixing bug in command 'loop' and 'next' when used with a count value.
+
+	- Fixing bug in command 'tcl exec' that prevented entering tcl commands where
+	  the tcl command, like definining a proc, spanned more than one line.
+
+Version 0.3.3
+
+	- Adding command 'command at' to introduce timed commands. While timed commands
+	  can be emulated by using a sufficient number of 'next', this command is much
+	  more scalable. If the time given for the command is preceeded by a '+', the
+	  time will be considered relative, otherwise absolute time is used. Absolute
+	  time is seconds since EPOCH (1. jan 1970). The command 'command at' without
+	  any other arguments will listed timed commands. When time for a time command
+	  elapses, the command will be excuted and the entry removed. The syntax of the
+	  command is:
+
+		command at [[+]<time> <command ........>] // time =  [[hh:]mm:]nn[.nnnnn]
+
+	- Adding command 'include' to include a file while reading the ini file. This command
+	  MUST NOT be used in a command loop while running frames through Snowmix as
+	  reading files can block for a short or longer period. So use it ONLY in
+	  the ini file. The syntax is:
+
+		include <file name>
+
+	- Adding command 'label'. The command 'label' can only be used inside commands
+	  created using 'command create'. They have no function, except they function
+	  as jump points for the command 'goto'. The syntax is:
+
+		label <label name>
+
+	- Adding command 'goto'. This function can only be used inside commands created
+	  using 'command create'. It pprovides an unconditional jump to label <label name>.
+	  The syntax is:
+
+		goto <label name>
+
+	- Adding command 'if', 'else', 'endif'. All 'if's must have a corresponding 'endif'.
+	  An 'if' can have a corresponding 'else'. If condition for the 'if' is true, then
+	  the commands below 'if' until 'else' (if existing) are excuted. If the condition
+	  is false, the commands below 'else' are executed. If no 'else' is present, the
+	  execution continues after the 'endif'. The conditions that can be tested on are
+	  'feedstate(<feed number>,<feed state>)', prevstate(<feed number>,<feed state>)'
+	  and 'exist(command,<command name>)'. Condition can be negated with '!' and
+	  combined with '&&' and '||'. <feed number> is a positive interger indicating the
+	  number of a real feed. The test feedstate test on current feed status while
+	  prevstate test on previous feed state. In both cases it is the state of the
+	  reel feed rather than virtual feeds. The condition exist() can be used to
+	  test whether or not a command created with 'command create' exist. The syntax is:
+
+		if <condition>
+		  command
+		  command
+		  ...
+		else
+		  command
+		  command
+		  ...
+		endif
+
+	  The syntax for condition is:
+
+		<condition> = ['!']<cond> [('||' | '&&') <condition>]
+		<cond>      = <feedstate> | <prevstate> | <exist>
+		<feedstate> = feedstate(<feed no>,<feed state>) | 
+		<prevstate> = prevstate(<feed no>,<feed state>) | 
+		<exist>     = exist(command,<command name>);
+		<feed no>   = 0....(2^32)-1
+		<feed state>= 'SETUP' | 'PENDING' | 'RUNNING' | 'STALLED' | 'DISCONNECTED'
+		  
+	- Reserved command 'nextframe' renamed to next. The command 'nextframe' will work
+	  for the next two releases and then be removed. A command containing the command
+	  'next' will suspend execution of the command until called next time (which may
+	  be for the next frame, if the command is in the main command loop (included
+	  in the command given for the command 'overlay finish'. The syntax is:
+
+		next [<frame count>]
+
+	- Adding command 'command addatline'. This command can be used to add a command at
+	  a specific line in the command <command name>. The syntax is:
+
+		command addatline <command name> <line number> <command>
+
+	- Adding command 'command deleteline'. This command deletes a specific line in a
+	  command. Commands can be listed with the command 'command list <command name>' to
+	  identify the line to be deleted. The syntax is:
+
+		command deleteline <command name> <line number>
+
+	- Adding command 'command push'. This command adds a <command> to the end of the command
+	  <command name>. The syntax is:
+
+		command push <command name> <command>
+
+	- Adding command 'command pop'. This command removes one or more lines in a command
+	  by popping them from the end of the command. The syntax is:
+
+		command pop <command name> [ <count>]
+
+	- The command 'command list <command name>' listed the command lines counting
+	  from 0. Changed to counting from 1.
+
+	- Fixing incorrect return values of command parsing in class CCommand and further
+	  use of this in parsing in class CController.
+
+	- Adding command 'command delete'. The syntax is:
+
+		command delete <command name>
+
+	- Optimize for speed parsing of commands in parse_commands in class CController.
+
+	- Optimize for speed parsing commands in class CVideoFeed.
+
+	- Adding class CVideoFeeds and moving video feed relevant code to this class.
+	  Mostly moved from class CController.
+
+	- Adding command option 'maxplaces video feeds' to command 'maxplaces'.
+
+	- Adding command 'require version'. This enforces that the SNowmix version
+	  must match <major 1>.<major 2> and that Snowmix version major1.major2.minor
+	  MUST be greater or equel to <minor>. Adding 'require version 0.3.2' to
+	  ini files. The syntax is
+
+		require version <major 1>.<major 2>.<minor>
+
+	- Removing dead code in controller.cpp
+
+	- Making 'maxplaces' code in controller.cpp private for class CController.
+
+	- Adding many new entries to list_help in class CVideoText in video_text.cpp.
+	  Should have been in version 0.3.2
+
+	- Adding module 'videorate' to all input examples in scripts directory. It is
+	  not strictly necessary, but useful if you use another video source with a
+	  different framerate.
+
+
+Version 0.3.2
+
+	- Adding command 'text font available' to list text font families available on platform.
+	  The syntax is:
+
+		text font available
+
+	- Adding commands 'text place move clip' and 'text place backgr move clip' to add animation
+	  for clipping text (alone) and clipping background (and text). The syntax for the commands
+	  are:
+
+		text place move clip [<id no> <delta left> <delta right> <delta top>
+			<delta bottom> <left steps> <right steps> <top steps> <bottom steps>]
+
+		text place backgr move clip [<id no> <delta left> <delta right> <delta top>
+			<delta bottom> <left steps> <right steps> <top steps> <bottom steps>]
+
+	- Adding command 'text place scale'. A scale value of 1.0 means no scaling. A scaling
+	  means no text will be displayed.
+
+		text place scale [<place id> <scale x> <scale y>]
+
+	- Adding command 'text place move scale'.
+
+		text place move scale [<place id> <delta scale x> <delta scale y> <step x> <step y>]
+
+	- Adding command 'text place clip'. Full clip is '0.0 1.0 0.0 1.0'. Clipping more
+	  can be '0.1 0.6 0.2 0.7' that will 10% in from left, 40% from right, 20% from top
+	  30% from bottom.
+
+		text place clip [<place id> [<clip left> <clip right> <clip top> <clip bottom>]]
+
+	- Adding command 'text place backgr clip'. Clipping background and text as text.
+
+		text place backgr clip [<place id> [<clip left> <clip right> <clip top> <clip bottom>]]
+
+	- Adding command 'text place backgr move alpha' to add animation for changing alpha
+	  of text background. This also affect alpha of linpat. This is explained further below.
+	  The syntax is:
+
+		text place backgr move alpha [<id no> <delta alpha_bg> <alpha_bg steps> ]
+
+	- Adding command 'text place move alpha'. The commands adds ability to automatically
+	  change the alpha by adding <delta alpha> repeated <delta steps> times. Alpha is
+	  kept betwen 0.0 and 1.0. The syntax is:
+
+		text place move alpha [<place id> <delta alpha> <delta steps>]
+
+	- Adding command 'text place move rotation'. The commands adds ability to automatically
+	  change the rotation by adding <delta rotation> repeated <delta steps> times. Rotation
+	  is kept between 2PI and -2PI. The syntax is:
+
+		text place move rotation [<place id> <delta rotation> <delta steps>]
+
+	- Adding command 'text string concat' to concatenate two text strings. If destination
+	  string is empty, it is created as initially an empty string. The destination string
+	  is concatenated for all following source strings. The syntax is:
+
+		text string concat <destination text id> <source text id> [<source text id> ...]
+
+	- Various cleaning in the class CTextItem aligning output and correction of minor errors.
+
+	- All alpha parameters for text linear pattern (linpat) background are now multiplied
+	  with the alpha value for the the text background. This way manipulating the alpha
+	  value of the text background will also affect the alpha for the linpat background.
+
+	- Fixing loop n. Loop function for 'loop 1' was not working.
+
+	- All text strings for 'text string <text id> <some text>' are now parsed for
+	  occurrence of '\n', '\t' and '\\' and translated to Newline, Tab and '\' (their)
+	  respective codes fo course). Note that Newlines and Tabs in strings will affect
+	  layout of the string. Newlines in strings will create multi line layout and Tabs
+	  in strings will cause indentation.
+
+Version 0.3.1 alpha
+
+	- Adding command 'command afterend ' to set the next command of <command name> to point to NULL meaning no command of <command name> will be executed (if it is included) until <command name> is restarted. The syntax is:
+
+            command afterend <command name>
+
+	- Adding command 'maxplaces' to set maximum number of strings, fonts, text places, images, image places and virtual feeds. The command should be used early in the ini files as the command has no effect after text, fonts etc. has been created. The syntax is:
+
+    maxplaces [(strings | fonts | texts | images | imageplaces | virtual feeds) <number>]
+
+	- Command 'text place move' renamed to 'text place repeat move'. This breaks earlier ini files and ini files examples has been updated. Syntax is now:
+
+            text place repeat move [<id no> | <id no> <dx> <dy> <end x> <end y>]
+
+	- Adding command 'text place grow'. Only the first charaters are shown. In next frame more characters are shown etc. Grow speed by (len>>4 | 0x01) by default. Syntax is:
+
+            text place grow <place id> <start len> [<delta grow>]
+
+	- Adding command 'text place coor' to change the coordinates of a text placed. The syntax of the command is:
+
+    text place coor [<place_id> <x> <y>]
+
+	- Adding command 'text place move coor' to add a command that automatically moves text from one set of coordinates to another. The syntax is
+
+    text place move coor [<place_id> <delta_x> <delta_y> <step_x> <step_y>]
+
+	- Adding alpha channel for text object. Valid values for alpha is 0.0 >= alpha <= 1.0. This breaks earlier format of ini files and ini example files has been updated. The command text place now has the syntax:
+
+    text place [<place_id> [<text_id> <font_id> <x> <y> [<red> <green> <blue>
+        [ <alpha> [ nw | ne | se | sw | n | s | e | w ]]]]]
+
+	- Adding command 'text place alpha' to change the alpha of text placed. The syntax is:
+
+    text place alpha [<place id> <alpha>]
+
+	- Adding command 'text place rotation' to change the rotation of text placed. The syntax is:
+
+    text place rotation [<place id> <rotation>]
+
+	- Adding text [#RUNTIME,d] where d is a feed number and the runtime is the runtime since the feed started. [#RUNTIME] defines system running time.
+
+	- Speeding up controller parse commands by moving parsing of 'text' commands and supporting functions to video_text module (class CVideoText)
+
+	- Speeding up controller parse commands by moving parsing of 'command' commands and supporting functions to command module (class CCommand).
+
+	- Changing command 'help text', 'help virtual feed' and 'help command' into 'text help', 'virtual feed help' and 'command help' as well as moving respective help listing to the class CVideoText, class CVirtualFeed and class CCommand.
+
+	- Adding means to delete earlier created linear pattern (linpat) for background of text placed using the command listed below:
+
+            text place backgr linpat <place_id>
+
+
+
+	- Adding command 'command afterend ' to set the next command of <command name> to point to NULL meaning no command of <command name> will be executed (if it is included) until <command name> is restarted. The syntax is:
+
+            command afterend <command name>
+
+	- Adding command 'maxplaces' to set maximum number of strings, fonts, text places, images, image places and virtual feeds. The command should be used early in the ini files as the command has no effect after text, fonts etc. has been created. The syntax is:
+
+    maxplaces [(strings | fonts | texts | images | imageplaces | virtual feeds) <number>]
+
+	- Command 'text place move' renamed to 'text place repeat move'. This breaks earlier ini files and ini files examples has been updated. Syntax is now:
+
+            text place repeat move [<id no> | <id no> <dx> <dy> <end x> <end y>]
+
+	- Adding command 'text place grow'. Only the first charaters are shown. In next frame more characters are shown etc. Grow speed by (len>>4 | 0x01) by default. Syntax is:
+
+            text place grow <place id> <start len> [<delta grow>]
+
+	- Adding command 'text place coor' to change the coordinates of a text placed. The syntax of the command is:
+
+    text place coor [<place_id> <x> <y>]
+
+	- Adding command 'text place move coor' to add a command that automatically moves text from one set of coordinates to another. The syntax is
+
+    text place move coor [<place_id> <delta_x> <delta_y> <step_x> <step_y>]
+
+	- Adding alpha channel for text object. Valid values for alpha is 0.0 >= alpha <= 1.0. This breaks earlier format of ini files and ini example files has been updated. The command text place now has the syntax:
+
+    text place [<place_id> [<text_id> <font_id> <x> <y> [<red> <green> <blue>
+        [ <alpha> [ nw | ne | se | sw | n | s | e | w ]]]]]
+
+	- Adding command 'text place alpha' to change the alpha of text placed. The syntax is:
+
+    text place alpha [<place id> <alpha>]
+
+	- Adding command 'text place rotation' to change the rotation of text placed. The syntax is:
+
+    text place rotation [<place id> <rotation>]
+
+	- Adding text [#RUNTIME,d] where d is a feed number and the runtime is the runtime since the feed started. [#RUNTIME] defines system running time.
+
+	- Speeding up controller parse commands by moving parsing of 'text' commands and supporting functions to video_text module (class CVideoText)
+
+	- Speeding up controller parse commands by moving parsing of 'command' commands and supporting functions to command module (class CCommand).
+
+	- Changing command 'help text', 'help virtual feed' and 'help command' into 'text help', 'virtual feed help' and 'command help' as well as moving respective help listing to the class CVideoText, class CVirtualFeed and class CCommand.
+
+	- Adding means to delete earlier created linear pattern (linpat) for background of text placed using the command listed below:
+
+            text place backgr linpat <place_id>
+
+Version 0.3.0 alpha
+
+	- First public release

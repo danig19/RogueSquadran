@@ -1,5 +1,6 @@
 controller.lo: controller.cpp /usr/include/unistd.h \
- /usr/include/features.h /usr/include/i386-linux-gnu/bits/predefs.h \
+ /usr/include/features.h /usr/include/stdc-predef.h \
+ /usr/include/i386-linux-gnu/bits/predefs.h \
  /usr/include/i386-linux-gnu/sys/cdefs.h \
  /usr/include/i386-linux-gnu/bits/wordsize.h \
  /usr/include/i386-linux-gnu/gnu/stubs.h \
@@ -8,11 +9,11 @@ controller.lo: controller.cpp /usr/include/unistd.h \
  /usr/include/i386-linux-gnu/bits/environments.h \
  /usr/include/i386-linux-gnu/bits/types.h \
  /usr/include/i386-linux-gnu/bits/typesizes.h \
- /usr/lib/gcc/i686-linux-gnu/4.6/include/stddef.h \
+ /usr/lib/gcc/i686-linux-gnu/4.7/include/stddef.h \
  /usr/include/i386-linux-gnu/bits/confname.h /usr/include/getopt.h \
  /usr/include/i386-linux-gnu/bits/unistd.h /usr/include/stdio.h \
  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/i686-linux-gnu/4.6/include/stdarg.h \
+ /usr/lib/gcc/i686-linux-gnu/4.7/include/stdarg.h \
  /usr/include/i386-linux-gnu/bits/stdio_lim.h \
  /usr/include/i386-linux-gnu/bits/sys_errlist.h \
  /usr/include/i386-linux-gnu/bits/stdio.h \
@@ -20,7 +21,8 @@ controller.lo: controller.cpp /usr/include/unistd.h \
  /usr/include/i386-linux-gnu/bits/waitflags.h \
  /usr/include/i386-linux-gnu/bits/waitstatus.h /usr/include/endian.h \
  /usr/include/i386-linux-gnu/bits/endian.h \
- /usr/include/i386-linux-gnu/bits/byteswap.h /usr/include/xlocale.h \
+ /usr/include/i386-linux-gnu/bits/byteswap.h \
+ /usr/include/i386-linux-gnu/bits/byteswap-16.h /usr/include/xlocale.h \
  /usr/include/i386-linux-gnu/sys/types.h /usr/include/time.h \
  /usr/include/i386-linux-gnu/sys/select.h \
  /usr/include/i386-linux-gnu/bits/select.h \
@@ -29,13 +31,15 @@ controller.lo: controller.cpp /usr/include/unistd.h \
  /usr/include/i386-linux-gnu/bits/select2.h \
  /usr/include/i386-linux-gnu/sys/sysmacros.h \
  /usr/include/i386-linux-gnu/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/i386-linux-gnu/bits/stdlib-float.h \
  /usr/include/i386-linux-gnu/bits/stdlib.h \
- /usr/lib/gcc/i686-linux-gnu/4.6/include/stdint.h /usr/include/stdint.h \
+ /usr/lib/gcc/i686-linux-gnu/4.7/include/stdint.h /usr/include/stdint.h \
  /usr/include/i386-linux-gnu/bits/wchar.h /usr/include/ctype.h \
  /usr/include/i386-linux-gnu/sys/socket.h \
  /usr/include/i386-linux-gnu/sys/uio.h \
  /usr/include/i386-linux-gnu/bits/uio.h \
  /usr/include/i386-linux-gnu/bits/socket.h \
+ /usr/include/i386-linux-gnu/bits/socket_type.h \
  /usr/include/i386-linux-gnu/bits/sockaddr.h \
  /usr/include/i386-linux-gnu/asm/socket.h \
  /usr/include/asm-generic/socket.h \
@@ -48,6 +52,7 @@ controller.lo: controller.cpp /usr/include/unistd.h \
  /usr/include/i386-linux-gnu/sys/mman.h \
  /usr/include/i386-linux-gnu/bits/mman.h /usr/include/fcntl.h \
  /usr/include/i386-linux-gnu/bits/fcntl.h \
+ /usr/include/i386-linux-gnu/bits/fcntl-linux.h \
  /usr/include/i386-linux-gnu/bits/stat.h \
  /usr/include/i386-linux-gnu/bits/fcntl2.h /usr/include/errno.h \
  /usr/include/i386-linux-gnu/bits/errno.h /usr/include/linux/errno.h \
@@ -80,13 +85,13 @@ controller.lo: controller.cpp /usr/include/unistd.h \
  /usr/include/glib-2.0/glib/gtypes.h \
  /usr/lib/i386-linux-gnu/glib-2.0/include/glibconfig.h \
  /usr/include/glib-2.0/glib/gmacros.h \
- /usr/lib/gcc/i686-linux-gnu/4.6/include-fixed/limits.h \
- /usr/lib/gcc/i686-linux-gnu/4.6/include-fixed/syslimits.h \
+ /usr/lib/gcc/i686-linux-gnu/4.7/include-fixed/limits.h \
+ /usr/lib/gcc/i686-linux-gnu/4.7/include-fixed/syslimits.h \
  /usr/include/limits.h /usr/include/i386-linux-gnu/bits/posix1_lim.h \
  /usr/include/i386-linux-gnu/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/i386-linux-gnu/bits/posix2_lim.h \
  /usr/include/i386-linux-gnu/bits/xopen_lim.h \
- /usr/lib/gcc/i686-linux-gnu/4.6/include/float.h \
+ /usr/lib/gcc/i686-linux-gnu/4.7/include/float.h \
  /usr/include/glib-2.0/glib/gversionmacros.h \
  /usr/include/i386-linux-gnu/bits/timex.h \
  /usr/include/glib-2.0/glib/garray.h \
@@ -99,14 +104,6 @@ controller.lo: controller.cpp /usr/include/unistd.h \
  /usr/include/i386-linux-gnu/bits/siginfo.h \
  /usr/include/i386-linux-gnu/bits/sigaction.h \
  /usr/include/i386-linux-gnu/bits/sigcontext.h \
- /usr/include/i386-linux-gnu/asm/sigcontext.h /usr/include/linux/types.h \
- /usr/include/i386-linux-gnu/asm/types.h /usr/include/asm-generic/types.h \
- /usr/include/asm-generic/int-ll64.h \
- /usr/include/i386-linux-gnu/asm/bitsperlong.h \
- /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
- /usr/include/linux/stddef.h \
- /usr/include/i386-linux-gnu/asm/posix_types.h \
- /usr/include/i386-linux-gnu/asm/posix_types_32.h \
  /usr/include/i386-linux-gnu/bits/sigstack.h \
  /usr/include/i386-linux-gnu/sys/ucontext.h \
  /usr/include/i386-linux-gnu/bits/sigthread.h \
@@ -124,7 +121,7 @@ controller.lo: controller.cpp /usr/include/unistd.h \
  /usr/include/glib-2.0/glib/gfileutils.h \
  /usr/include/glib-2.0/glib/ggettext.h /usr/include/glib-2.0/glib/ghash.h \
  /usr/include/glib-2.0/glib/glist.h /usr/include/glib-2.0/glib/gmem.h \
- /usr/include/glib-2.0/glib/ghmac.h \
+ /usr/include/glib-2.0/glib/gnode.h /usr/include/glib-2.0/glib/ghmac.h \
  /usr/include/glib-2.0/glib/gchecksum.h \
  /usr/include/glib-2.0/glib/ghook.h \
  /usr/include/glib-2.0/glib/ghostutils.h \
@@ -137,7 +134,7 @@ controller.lo: controller.cpp /usr/include/unistd.h \
  /usr/include/glib-2.0/glib/gmappedfile.h \
  /usr/include/glib-2.0/glib/gmarkup.h \
  /usr/include/glib-2.0/glib/gmessages.h \
- /usr/include/glib-2.0/glib/gnode.h /usr/include/glib-2.0/glib/goption.h \
+ /usr/include/glib-2.0/glib/goption.h \
  /usr/include/glib-2.0/glib/gpattern.h \
  /usr/include/glib-2.0/glib/gprimes.h /usr/include/glib-2.0/glib/gqsort.h \
  /usr/include/glib-2.0/glib/gqueue.h /usr/include/glib-2.0/glib/grand.h \
@@ -205,8 +202,8 @@ controller.lo: controller.cpp /usr/include/unistd.h \
  /usr/include/pango-1.0/pango/pango-utils.h /usr/include/cairo/cairo.h \
  /usr/include/cairo/cairo-version.h /usr/include/cairo/cairo-features.h \
  /usr/include/cairo/cairo-deprecated.h video_image.h \
- /usr/include/libpng12/png.h /usr/include/zlib.h /usr/include/zconf.h \
- /usr/include/zlibdefs.h /usr/include/libpng12/pngconf.h \
+ /usr/include/libpng12/png.h /usr/include/zlib.h \
+ /usr/include/i386-linux-gnu/zconf.h /usr/include/libpng12/pngconf.h \
  /usr/include/setjmp.h /usr/include/i386-linux-gnu/bits/setjmp2.h \
  cairo_graphic.h virtual_feed.h video_shape.h video_mixer.h \
  tcl_interface.h /usr/include/tcl8.5/tcl.h /usr/include/tcl8.5/tclDecls.h \
@@ -215,6 +212,8 @@ controller.lo: controller.cpp /usr/include/unistd.h \
 /usr/include/unistd.h:
 
 /usr/include/features.h:
+
+/usr/include/stdc-predef.h:
 
 /usr/include/i386-linux-gnu/bits/predefs.h:
 
@@ -234,7 +233,7 @@ controller.lo: controller.cpp /usr/include/unistd.h \
 
 /usr/include/i386-linux-gnu/bits/typesizes.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include/stddef.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include/stddef.h:
 
 /usr/include/i386-linux-gnu/bits/confname.h:
 
@@ -250,7 +249,7 @@ controller.lo: controller.cpp /usr/include/unistd.h \
 
 /usr/include/wchar.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include/stdarg.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include/stdarg.h:
 
 /usr/include/i386-linux-gnu/bits/stdio_lim.h:
 
@@ -271,6 +270,8 @@ controller.lo: controller.cpp /usr/include/unistd.h \
 /usr/include/i386-linux-gnu/bits/endian.h:
 
 /usr/include/i386-linux-gnu/bits/byteswap.h:
+
+/usr/include/i386-linux-gnu/bits/byteswap-16.h:
 
 /usr/include/xlocale.h:
 
@@ -294,9 +295,11 @@ controller.lo: controller.cpp /usr/include/unistd.h \
 
 /usr/include/alloca.h:
 
+/usr/include/i386-linux-gnu/bits/stdlib-float.h:
+
 /usr/include/i386-linux-gnu/bits/stdlib.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include/stdint.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -311,6 +314,8 @@ controller.lo: controller.cpp /usr/include/unistd.h \
 /usr/include/i386-linux-gnu/bits/uio.h:
 
 /usr/include/i386-linux-gnu/bits/socket.h:
+
+/usr/include/i386-linux-gnu/bits/socket_type.h:
 
 /usr/include/i386-linux-gnu/bits/sockaddr.h:
 
@@ -339,6 +344,8 @@ controller.lo: controller.cpp /usr/include/unistd.h \
 /usr/include/fcntl.h:
 
 /usr/include/i386-linux-gnu/bits/fcntl.h:
+
+/usr/include/i386-linux-gnu/bits/fcntl-linux.h:
 
 /usr/include/i386-linux-gnu/bits/stat.h:
 
@@ -466,9 +473,9 @@ video_text.h:
 
 /usr/include/glib-2.0/glib/gmacros.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include-fixed/limits.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include-fixed/limits.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include-fixed/syslimits.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include-fixed/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -482,7 +489,7 @@ video_text.h:
 
 /usr/include/i386-linux-gnu/bits/xopen_lim.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include/float.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include/float.h:
 
 /usr/include/glib-2.0/glib/gversionmacros.h:
 
@@ -511,28 +518,6 @@ video_text.h:
 /usr/include/i386-linux-gnu/bits/sigaction.h:
 
 /usr/include/i386-linux-gnu/bits/sigcontext.h:
-
-/usr/include/i386-linux-gnu/asm/sigcontext.h:
-
-/usr/include/linux/types.h:
-
-/usr/include/i386-linux-gnu/asm/types.h:
-
-/usr/include/asm-generic/types.h:
-
-/usr/include/asm-generic/int-ll64.h:
-
-/usr/include/i386-linux-gnu/asm/bitsperlong.h:
-
-/usr/include/asm-generic/bitsperlong.h:
-
-/usr/include/linux/posix_types.h:
-
-/usr/include/linux/stddef.h:
-
-/usr/include/i386-linux-gnu/asm/posix_types.h:
-
-/usr/include/i386-linux-gnu/asm/posix_types_32.h:
 
 /usr/include/i386-linux-gnu/bits/sigstack.h:
 
@@ -576,6 +561,8 @@ video_text.h:
 
 /usr/include/glib-2.0/glib/gmem.h:
 
+/usr/include/glib-2.0/glib/gnode.h:
+
 /usr/include/glib-2.0/glib/ghmac.h:
 
 /usr/include/glib-2.0/glib/gchecksum.h:
@@ -605,8 +592,6 @@ video_text.h:
 /usr/include/glib-2.0/glib/gmarkup.h:
 
 /usr/include/glib-2.0/glib/gmessages.h:
-
-/usr/include/glib-2.0/glib/gnode.h:
 
 /usr/include/glib-2.0/glib/goption.h:
 
@@ -764,9 +749,7 @@ video_image.h:
 
 /usr/include/zlib.h:
 
-/usr/include/zconf.h:
-
-/usr/include/zlibdefs.h:
+/usr/include/i386-linux-gnu/zconf.h:
 
 /usr/include/libpng12/pngconf.h:
 

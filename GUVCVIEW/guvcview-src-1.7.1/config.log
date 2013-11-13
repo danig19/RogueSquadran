@@ -348,104 +348,389 @@ configure:6316: checking pkg-config is at least version 0.9.0
 configure:6319: result: yes
 configure:6329: checking for DEPS
 configure:6336: $PKG_CONFIG --exists --print-errors "gtk+-3.0 >= 3.0.0 glib-2.0 >= 2.10.0 sdl >= 1.2.10 portaudio-2.0 libpng libavcodec libavutil libv4l2 libudev"
-Package gtk+-3.0 was not found in the pkg-config search path.
-Perhaps you should add the directory containing `gtk+-3.0.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'gtk+-3.0' found
-Package glib-2.0 was not found in the pkg-config search path.
-Perhaps you should add the directory containing `glib-2.0.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'glib-2.0' found
-Package sdl was not found in the pkg-config search path.
-Perhaps you should add the directory containing `sdl.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'sdl' found
-Package portaudio-2.0 was not found in the pkg-config search path.
-Perhaps you should add the directory containing `portaudio-2.0.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'portaudio-2.0' found
-Package libpng was not found in the pkg-config search path.
-Perhaps you should add the directory containing `libpng.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'libpng' found
-Package libavcodec was not found in the pkg-config search path.
-Perhaps you should add the directory containing `libavcodec.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'libavcodec' found
-Package libavutil was not found in the pkg-config search path.
-Perhaps you should add the directory containing `libavutil.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'libavutil' found
-Package libv4l2 was not found in the pkg-config search path.
-Perhaps you should add the directory containing `libv4l2.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'libv4l2' found
-configure:6339: $? = 1
+configure:6339: $? = 0
 configure:6353: $PKG_CONFIG --exists --print-errors "gtk+-3.0 >= 3.0.0 glib-2.0 >= 2.10.0 sdl >= 1.2.10 portaudio-2.0 libpng libavcodec libavutil libv4l2 libudev"
-Package gtk+-3.0 was not found in the pkg-config search path.
-Perhaps you should add the directory containing `gtk+-3.0.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'gtk+-3.0' found
-Package glib-2.0 was not found in the pkg-config search path.
-Perhaps you should add the directory containing `glib-2.0.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'glib-2.0' found
-Package sdl was not found in the pkg-config search path.
-Perhaps you should add the directory containing `sdl.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'sdl' found
-Package portaudio-2.0 was not found in the pkg-config search path.
-Perhaps you should add the directory containing `portaudio-2.0.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'portaudio-2.0' found
-Package libpng was not found in the pkg-config search path.
-Perhaps you should add the directory containing `libpng.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'libpng' found
-Package libavcodec was not found in the pkg-config search path.
-Perhaps you should add the directory containing `libavcodec.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'libavcodec' found
-Package libavutil was not found in the pkg-config search path.
-Perhaps you should add the directory containing `libavutil.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'libavutil' found
-Package libv4l2 was not found in the pkg-config search path.
-Perhaps you should add the directory containing `libv4l2.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'libv4l2' found
-configure:6356: $? = 1
-configure:6370: result: no
-No package 'gtk+-3.0' found
-No package 'glib-2.0' found
-No package 'sdl' found
-No package 'portaudio-2.0' found
-No package 'libpng' found
-No package 'libavcodec' found
-No package 'libavutil' found
-No package 'libv4l2' found
-configure:6386: error: Package requirements (gtk+-3.0 >= 3.0.0 glib-2.0 >= 2.10.0 sdl >= 1.2.10 portaudio-2.0 libpng libavcodec libavutil libv4l2 libudev) were not met:
+configure:6356: $? = 0
+configure:6414: result: yes
+configure:6421: checking if you want to enable debian menu
+configure:6431: result: yes
+configure:6443: checking if you want to enable desktop file
+configure:6453: result: yes
+configure:6465: checking if you want to enable pulse support
+configure:6475: result: yes
+configure:6481: checking for PULSE
+configure:6488: $PKG_CONFIG --exists --print-errors "libpulse >= 0.9.15"
+configure:6491: $? = 0
+configure:6505: $PKG_CONFIG --exists --print-errors "libpulse >= 0.9.15"
+configure:6508: $? = 0
+configure:6546: result: yes
+configure:6564: checking avcodec.h usability
+configure:6564: gcc -c -g -O2  conftest.c >&5
+conftest.c:62:21: fatal error: avcodec.h: No such file or directory
+compilation terminated.
+configure:6564: $? = 1
+configure: failed program was:
+| /* confdefs.h */
+| #define PACKAGE_NAME "guvcview"
+| #define PACKAGE_TARNAME "guvcview"
+| #define PACKAGE_VERSION "1.7.1"
+| #define PACKAGE_STRING "guvcview 1.7.1"
+| #define PACKAGE_BUGREPORT "http://guvcview.sourceforge.net/"
+| #define PACKAGE_URL ""
+| #define PACKAGE "guvcview"
+| #define VERSION "1.7.1"
+| #define STDC_HEADERS 1
+| #define GETTEXT_PACKAGE "guvcview"
+| #define HAVE_SYS_TYPES_H 1
+| #define HAVE_SYS_STAT_H 1
+| #define HAVE_STDLIB_H 1
+| #define HAVE_STRING_H 1
+| #define HAVE_MEMORY_H 1
+| #define HAVE_STRINGS_H 1
+| #define HAVE_INTTYPES_H 1
+| #define HAVE_STDINT_H 1
+| #define HAVE_UNISTD_H 1
+| #define HAVE_LOCALE_H 1
+| #define HAVE_LC_MESSAGES 1
+| #define HAVE_BIND_TEXTDOMAIN_CODESET 1
+| #define HAVE_GETTEXT 1
+| #define HAVE_DCGETTEXT 1
+| #define ENABLE_NLS 1
+| #define PULSEAUDIO 1
+| /* end confdefs.h.  */
+| #include <stdio.h>
+| #ifdef HAVE_SYS_TYPES_H
+| # include <sys/types.h>
+| #endif
+| #ifdef HAVE_SYS_STAT_H
+| # include <sys/stat.h>
+| #endif
+| #ifdef STDC_HEADERS
+| # include <stdlib.h>
+| # include <stddef.h>
+| #else
+| # ifdef HAVE_STDLIB_H
+| #  include <stdlib.h>
+| # endif
+| #endif
+| #ifdef HAVE_STRING_H
+| # if !defined STDC_HEADERS && defined HAVE_MEMORY_H
+| #  include <memory.h>
+| # endif
+| # include <string.h>
+| #endif
+| #ifdef HAVE_STRINGS_H
+| # include <strings.h>
+| #endif
+| #ifdef HAVE_INTTYPES_H
+| # include <inttypes.h>
+| #endif
+| #ifdef HAVE_STDINT_H
+| # include <stdint.h>
+| #endif
+| #ifdef HAVE_UNISTD_H
+| # include <unistd.h>
+| #endif
+| #include <avcodec.h>
+configure:6564: result: no
+configure:6564: checking avcodec.h presence
+configure:6564: gcc -E  conftest.c
+conftest.c:29:21: fatal error: avcodec.h: No such file or directory
+compilation terminated.
+configure:6564: $? = 1
+configure: failed program was:
+| /* confdefs.h */
+| #define PACKAGE_NAME "guvcview"
+| #define PACKAGE_TARNAME "guvcview"
+| #define PACKAGE_VERSION "1.7.1"
+| #define PACKAGE_STRING "guvcview 1.7.1"
+| #define PACKAGE_BUGREPORT "http://guvcview.sourceforge.net/"
+| #define PACKAGE_URL ""
+| #define PACKAGE "guvcview"
+| #define VERSION "1.7.1"
+| #define STDC_HEADERS 1
+| #define GETTEXT_PACKAGE "guvcview"
+| #define HAVE_SYS_TYPES_H 1
+| #define HAVE_SYS_STAT_H 1
+| #define HAVE_STDLIB_H 1
+| #define HAVE_STRING_H 1
+| #define HAVE_MEMORY_H 1
+| #define HAVE_STRINGS_H 1
+| #define HAVE_INTTYPES_H 1
+| #define HAVE_STDINT_H 1
+| #define HAVE_UNISTD_H 1
+| #define HAVE_LOCALE_H 1
+| #define HAVE_LC_MESSAGES 1
+| #define HAVE_BIND_TEXTDOMAIN_CODESET 1
+| #define HAVE_GETTEXT 1
+| #define HAVE_DCGETTEXT 1
+| #define ENABLE_NLS 1
+| #define PULSEAUDIO 1
+| /* end confdefs.h.  */
+| #include <avcodec.h>
+configure:6564: result: no
+configure:6564: checking for avcodec.h
+configure:6564: result: no
+configure:6571: checking ffmpeg/avcodec.h usability
+configure:6571: gcc -c -g -O2  conftest.c >&5
+conftest.c:62:28: fatal error: ffmpeg/avcodec.h: No such file or directory
+compilation terminated.
+configure:6571: $? = 1
+configure: failed program was:
+| /* confdefs.h */
+| #define PACKAGE_NAME "guvcview"
+| #define PACKAGE_TARNAME "guvcview"
+| #define PACKAGE_VERSION "1.7.1"
+| #define PACKAGE_STRING "guvcview 1.7.1"
+| #define PACKAGE_BUGREPORT "http://guvcview.sourceforge.net/"
+| #define PACKAGE_URL ""
+| #define PACKAGE "guvcview"
+| #define VERSION "1.7.1"
+| #define STDC_HEADERS 1
+| #define GETTEXT_PACKAGE "guvcview"
+| #define HAVE_SYS_TYPES_H 1
+| #define HAVE_SYS_STAT_H 1
+| #define HAVE_STDLIB_H 1
+| #define HAVE_STRING_H 1
+| #define HAVE_MEMORY_H 1
+| #define HAVE_STRINGS_H 1
+| #define HAVE_INTTYPES_H 1
+| #define HAVE_STDINT_H 1
+| #define HAVE_UNISTD_H 1
+| #define HAVE_LOCALE_H 1
+| #define HAVE_LC_MESSAGES 1
+| #define HAVE_BIND_TEXTDOMAIN_CODESET 1
+| #define HAVE_GETTEXT 1
+| #define HAVE_DCGETTEXT 1
+| #define ENABLE_NLS 1
+| #define PULSEAUDIO 1
+| /* end confdefs.h.  */
+| #include <stdio.h>
+| #ifdef HAVE_SYS_TYPES_H
+| # include <sys/types.h>
+| #endif
+| #ifdef HAVE_SYS_STAT_H
+| # include <sys/stat.h>
+| #endif
+| #ifdef STDC_HEADERS
+| # include <stdlib.h>
+| # include <stddef.h>
+| #else
+| # ifdef HAVE_STDLIB_H
+| #  include <stdlib.h>
+| # endif
+| #endif
+| #ifdef HAVE_STRING_H
+| # if !defined STDC_HEADERS && defined HAVE_MEMORY_H
+| #  include <memory.h>
+| # endif
+| # include <string.h>
+| #endif
+| #ifdef HAVE_STRINGS_H
+| # include <strings.h>
+| #endif
+| #ifdef HAVE_INTTYPES_H
+| # include <inttypes.h>
+| #endif
+| #ifdef HAVE_STDINT_H
+| # include <stdint.h>
+| #endif
+| #ifdef HAVE_UNISTD_H
+| # include <unistd.h>
+| #endif
+| #include <ffmpeg/avcodec.h>
+configure:6571: result: no
+configure:6571: checking ffmpeg/avcodec.h presence
+configure:6571: gcc -E  conftest.c
+conftest.c:29:28: fatal error: ffmpeg/avcodec.h: No such file or directory
+compilation terminated.
+configure:6571: $? = 1
+configure: failed program was:
+| /* confdefs.h */
+| #define PACKAGE_NAME "guvcview"
+| #define PACKAGE_TARNAME "guvcview"
+| #define PACKAGE_VERSION "1.7.1"
+| #define PACKAGE_STRING "guvcview 1.7.1"
+| #define PACKAGE_BUGREPORT "http://guvcview.sourceforge.net/"
+| #define PACKAGE_URL ""
+| #define PACKAGE "guvcview"
+| #define VERSION "1.7.1"
+| #define STDC_HEADERS 1
+| #define GETTEXT_PACKAGE "guvcview"
+| #define HAVE_SYS_TYPES_H 1
+| #define HAVE_SYS_STAT_H 1
+| #define HAVE_STDLIB_H 1
+| #define HAVE_STRING_H 1
+| #define HAVE_MEMORY_H 1
+| #define HAVE_STRINGS_H 1
+| #define HAVE_INTTYPES_H 1
+| #define HAVE_STDINT_H 1
+| #define HAVE_UNISTD_H 1
+| #define HAVE_LOCALE_H 1
+| #define HAVE_LC_MESSAGES 1
+| #define HAVE_BIND_TEXTDOMAIN_CODESET 1
+| #define HAVE_GETTEXT 1
+| #define HAVE_DCGETTEXT 1
+| #define ENABLE_NLS 1
+| #define PULSEAUDIO 1
+| /* end confdefs.h.  */
+| #include <ffmpeg/avcodec.h>
+configure:6571: result: no
+configure:6571: checking for ffmpeg/avcodec.h
+configure:6571: result: no
+configure:6578: checking libavcodec/avcodec.h usability
+configure:6578: gcc -c -g -O2  conftest.c >&5
+configure:6578: $? = 0
+configure:6578: result: yes
+configure:6578: checking libavcodec/avcodec.h presence
+configure:6578: gcc -E  conftest.c
+configure:6578: $? = 0
+configure:6578: result: yes
+configure:6578: checking for libavcodec/avcodec.h
+configure:6578: result: yes
+configure:6601: checking whether byte ordering is bigendian
+configure:6616: gcc -c -g -O2  conftest.c >&5
+conftest.c:31:9: error: unknown type name 'not'
+conftest.c:31:15: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'universal'
+conftest.c:31:15: error: unknown type name 'universal'
+configure:6616: $? = 1
+configure: failed program was:
+| /* confdefs.h */
+| #define PACKAGE_NAME "guvcview"
+| #define PACKAGE_TARNAME "guvcview"
+| #define PACKAGE_VERSION "1.7.1"
+| #define PACKAGE_STRING "guvcview 1.7.1"
+| #define PACKAGE_BUGREPORT "http://guvcview.sourceforge.net/"
+| #define PACKAGE_URL ""
+| #define PACKAGE "guvcview"
+| #define VERSION "1.7.1"
+| #define STDC_HEADERS 1
+| #define GETTEXT_PACKAGE "guvcview"
+| #define HAVE_SYS_TYPES_H 1
+| #define HAVE_SYS_STAT_H 1
+| #define HAVE_STDLIB_H 1
+| #define HAVE_STRING_H 1
+| #define HAVE_MEMORY_H 1
+| #define HAVE_STRINGS_H 1
+| #define HAVE_INTTYPES_H 1
+| #define HAVE_STDINT_H 1
+| #define HAVE_UNISTD_H 1
+| #define HAVE_LOCALE_H 1
+| #define HAVE_LC_MESSAGES 1
+| #define HAVE_BIND_TEXTDOMAIN_CODESET 1
+| #define HAVE_GETTEXT 1
+| #define HAVE_DCGETTEXT 1
+| #define ENABLE_NLS 1
+| #define PULSEAUDIO 1
+| #define HAS_LIBAVCODEC_AVCODEC_H 1
+| /* end confdefs.h.  */
+| #ifndef __APPLE_CC__
+| 	       not a universal capable compiler
+| 	     #endif
+| 	     typedef int dummy;
+| 
+configure:6661: gcc -c -g -O2  conftest.c >&5
+configure:6661: $? = 0
+configure:6679: gcc -c -g -O2  conftest.c >&5
+conftest.c: In function 'main':
+conftest.c:37:4: error: unknown type name 'not'
+conftest.c:37:12: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'endian'
+configure:6679: $? = 1
+configure: failed program was:
+| /* confdefs.h */
+| #define PACKAGE_NAME "guvcview"
+| #define PACKAGE_TARNAME "guvcview"
+| #define PACKAGE_VERSION "1.7.1"
+| #define PACKAGE_STRING "guvcview 1.7.1"
+| #define PACKAGE_BUGREPORT "http://guvcview.sourceforge.net/"
+| #define PACKAGE_URL ""
+| #define PACKAGE "guvcview"
+| #define VERSION "1.7.1"
+| #define STDC_HEADERS 1
+| #define GETTEXT_PACKAGE "guvcview"
+| #define HAVE_SYS_TYPES_H 1
+| #define HAVE_SYS_STAT_H 1
+| #define HAVE_STDLIB_H 1
+| #define HAVE_STRING_H 1
+| #define HAVE_MEMORY_H 1
+| #define HAVE_STRINGS_H 1
+| #define HAVE_INTTYPES_H 1
+| #define HAVE_STDINT_H 1
+| #define HAVE_UNISTD_H 1
+| #define HAVE_LOCALE_H 1
+| #define HAVE_LC_MESSAGES 1
+| #define HAVE_BIND_TEXTDOMAIN_CODESET 1
+| #define HAVE_GETTEXT 1
+| #define HAVE_DCGETTEXT 1
+| #define ENABLE_NLS 1
+| #define PULSEAUDIO 1
+| #define HAS_LIBAVCODEC_AVCODEC_H 1
+| /* end confdefs.h.  */
+| #include <sys/types.h>
+| 		#include <sys/param.h>
+| 
+| int
+| main ()
+| {
+| #if BYTE_ORDER != BIG_ENDIAN
+| 		 not big endian
+| 		#endif
+| 
+|   ;
+|   return 0;
+| }
+configure:6807: result: no
+configure:6893: updating cache config.cache
+configure:6979: creating ./config.status
 
-No package 'gtk+-3.0' found
-No package 'glib-2.0' found
-No package 'sdl' found
-No package 'portaudio-2.0' found
-No package 'libpng' found
-No package 'libavcodec' found
-No package 'libavutil' found
-No package 'libv4l2' found
+## ---------------------- ##
+## Running config.status. ##
+## ---------------------- ##
 
-Consider adjusting the PKG_CONFIG_PATH environment variable if you
-installed software in a non-standard prefix.
+This file was extended by guvcview config.status 1.7.1, which was
+generated by GNU Autoconf 2.68.  Invocation command line was
 
-Alternatively, you may set the environment variables DEPS_CFLAGS
-and DEPS_LIBS to avoid the need to call pkg-config.
-See the pkg-config man page for more details.
+  CONFIG_FILES    = 
+  CONFIG_HEADERS  = 
+  CONFIG_LINKS    = 
+  CONFIG_COMMANDS = 
+  $ ./config.status 
+
+on rush
+
+config.status:961: creating Makefile
+config.status:961: creating data/Makefile
+config.status:961: creating data/icons/Makefile
+config.status:961: creating data/guvcview.desktop.in
+config.status:961: creating data/guvcview.in
+config.status:961: creating po/Makefile.in
+config.status:961: creating src/Makefile
+config.status:961: creating config.h
+config.status:1142: config.h is unchanged
+config.status:1190: executing depfiles commands
+config.status:1190: executing default-1 commands
+config.status:1190: executing po/stamp-it commands
+configure:8356:
+
+  guvcview 1.7.1
+  ----------------------
+
+  Prefix         : /usr
+
+  Pulse API      : yes
+
+  Desktop File   : yes
+  Debian Menu    : yes
+
+  Debug Symbols  : no
+
+
 
 ## ---------------- ##
 ## Cache variables. ##
 ## ---------------- ##
 
+ac_cv_c_bigendian=no
 ac_cv_c_compiler_gnu=yes
 ac_cv_env_CC_set=
 ac_cv_env_CC_value=
@@ -481,7 +766,10 @@ ac_cv_env_target_alias_set=
 ac_cv_env_target_alias_value=
 ac_cv_func_bind_textdomain_codeset=yes
 ac_cv_func_dcgettext=yes
+ac_cv_header_avcodec_h=no
+ac_cv_header_ffmpeg_avcodec_h=no
 ac_cv_header_inttypes_h=yes
+ac_cv_header_libavcodec_avcodec_h=yes
 ac_cv_header_libintl_h=yes
 ac_cv_header_locale_h=yes
 ac_cv_header_memory_h=yes
@@ -521,6 +809,10 @@ gt_cv_func_dgettext_libc=yes
 gt_cv_func_dgettext_libintl=no
 gt_cv_func_ngettext_libc=yes
 gt_cv_have_gettext=yes
+pkg_cv_DEPS_CFLAGS='-pthread -D_GNU_SOURCE=1 -D_REENTRANT -I/usr/include/gtk-3.0 -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/SDL  '
+pkg_cv_DEPS_LIBS='-lgtk-3 -lgdk-3 -latk-1.0 -lgio-2.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo-gobject -lpango-1.0 -lcairo -lgobject-2.0 -lglib-2.0 -lSDL -lportaudio -lasound -lm -lpthread -lpng12 -lavcodec -lavutil -lv4l2 -ludev -lrt  '
+pkg_cv_PULSE_CFLAGS='-D_REENTRANT  '
+pkg_cv_PULSE_LIBS='-lpulse  '
 
 ## ----------------- ##
 ## Output variables. ##
@@ -549,13 +841,13 @@ CPP='gcc -E'
 CPPFLAGS=''
 CYGPATH_W='echo'
 DATADIRNAME='share'
-DEBIAN_MENU_FALSE=''
+DEBIAN_MENU_FALSE='#'
 DEBIAN_MENU_TRUE=''
-DEFS=''
+DEFS='-DHAVE_CONFIG_H'
 DEPDIR='.deps'
-DEPS_CFLAGS=''
-DEPS_LIBS=''
-DESKTOP_FALSE=''
+DEPS_CFLAGS='-pthread -D_GNU_SOURCE=1 -D_REENTRANT -I/usr/include/gtk-3.0 -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/SDL  '
+DEPS_LIBS='-lgtk-3 -lgdk-3 -latk-1.0 -lgio-2.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo-gobject -lpango-1.0 -lcairo -lgobject-2.0 -lglib-2.0 -lSDL -lportaudio -lasound -lm -lpthread -lpng12 -lavcodec -lavutil -lv4l2 -ludev -lrt  '
+DESKTOP_FALSE='#'
 DESKTOP_TRUE=''
 ECHO_C=''
 ECHO_N='-n'
@@ -624,8 +916,8 @@ POFILES=' bg.po bs.po cs.po da.po de.po en_AU.po es.po eu.po fo.po fr.po gl.po h
 POSUB='po'
 PO_IN_DATADIR_FALSE=''
 PO_IN_DATADIR_TRUE=''
-PULSE_CFLAGS=''
-PULSE_LIBS=''
+PULSE_CFLAGS='-D_REENTRANT  '
+PULSE_LIBS='-lpulse  '
 SET_MAKE=''
 SHELL='/bin/bash'
 STRIP=''
@@ -634,7 +926,7 @@ VERSION='1.7.1'
 XGETTEXT='/usr/bin/xgettext'
 ac_ct_CC='gcc'
 am__EXEEXT_FALSE=''
-am__EXEEXT_TRUE=''
+am__EXEEXT_TRUE='#'
 am__fastdepCC_FALSE='#'
 am__fastdepCC_TRUE=''
 am__include='include'
@@ -650,7 +942,7 @@ datadir='${datarootdir}'
 datarootdir='${prefix}/share'
 docdir='${datarootdir}/doc/${PACKAGE_TARNAME}'
 dvidir='${docdir}'
-exec_prefix='NONE'
+exec_prefix='${prefix}'
 host_alias=''
 htmldir='${docdir}'
 includedir='${prefix}/include'
@@ -702,5 +994,7 @@ target_alias=''
 #define HAVE_GETTEXT 1
 #define HAVE_DCGETTEXT 1
 #define ENABLE_NLS 1
+#define PULSEAUDIO 1
+#define HAS_LIBAVCODEC_AVCODEC_H 1
 
-configure: exit 1
+configure: exit 0

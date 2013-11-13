@@ -1,5 +1,6 @@
 audio_util.lo: audio_util.cpp /usr/include/ctype.h \
- /usr/include/features.h /usr/include/i386-linux-gnu/bits/predefs.h \
+ /usr/include/features.h /usr/include/stdc-predef.h \
+ /usr/include/i386-linux-gnu/bits/predefs.h \
  /usr/include/i386-linux-gnu/sys/cdefs.h \
  /usr/include/i386-linux-gnu/bits/wordsize.h \
  /usr/include/i386-linux-gnu/gnu/stubs.h \
@@ -7,11 +8,12 @@ audio_util.lo: audio_util.cpp /usr/include/ctype.h \
  /usr/include/i386-linux-gnu/bits/types.h \
  /usr/include/i386-linux-gnu/bits/typesizes.h /usr/include/endian.h \
  /usr/include/i386-linux-gnu/bits/endian.h \
- /usr/include/i386-linux-gnu/bits/byteswap.h /usr/include/xlocale.h \
- /usr/include/string.h /usr/lib/gcc/i686-linux-gnu/4.6/include/stddef.h \
+ /usr/include/i386-linux-gnu/bits/byteswap.h \
+ /usr/include/i386-linux-gnu/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/string.h /usr/lib/gcc/i686-linux-gnu/4.7/include/stddef.h \
  /usr/include/i386-linux-gnu/bits/string3.h /usr/include/malloc.h \
  /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
- /usr/include/wchar.h /usr/lib/gcc/i686-linux-gnu/4.6/include/stdarg.h \
+ /usr/include/wchar.h /usr/lib/gcc/i686-linux-gnu/4.7/include/stdarg.h \
  /usr/include/i386-linux-gnu/bits/stdio_lim.h \
  /usr/include/i386-linux-gnu/bits/sys_errlist.h \
  /usr/include/i386-linux-gnu/bits/stdio.h \
@@ -31,8 +33,9 @@ audio_util.lo: audio_util.cpp /usr/include/ctype.h \
  /usr/include/SDL/SDL_platform.h /usr/include/stdlib.h \
  /usr/include/i386-linux-gnu/bits/waitflags.h \
  /usr/include/i386-linux-gnu/bits/waitstatus.h /usr/include/alloca.h \
+ /usr/include/i386-linux-gnu/bits/stdlib-float.h \
  /usr/include/i386-linux-gnu/bits/stdlib.h /usr/include/strings.h \
- /usr/include/inttypes.h /usr/lib/gcc/i686-linux-gnu/4.6/include/stdint.h \
+ /usr/include/inttypes.h /usr/lib/gcc/i686-linux-gnu/4.7/include/stdint.h \
  /usr/include/stdint.h /usr/include/i386-linux-gnu/bits/wchar.h \
  /usr/include/iconv.h /usr/include/SDL/begin_code.h \
  /usr/include/SDL/close_code.h /usr/include/SDL/SDL_audio.h \
@@ -50,6 +53,8 @@ audio_util.lo: audio_util.cpp /usr/include/ctype.h \
 /usr/include/ctype.h:
 
 /usr/include/features.h:
+
+/usr/include/stdc-predef.h:
 
 /usr/include/i386-linux-gnu/bits/predefs.h:
 
@@ -71,11 +76,13 @@ audio_util.lo: audio_util.cpp /usr/include/ctype.h \
 
 /usr/include/i386-linux-gnu/bits/byteswap.h:
 
+/usr/include/i386-linux-gnu/bits/byteswap-16.h:
+
 /usr/include/xlocale.h:
 
 /usr/include/string.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include/stddef.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include/stddef.h:
 
 /usr/include/i386-linux-gnu/bits/string3.h:
 
@@ -89,7 +96,7 @@ audio_util.lo: audio_util.cpp /usr/include/ctype.h \
 
 /usr/include/wchar.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include/stdarg.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include/stdarg.h:
 
 /usr/include/i386-linux-gnu/bits/stdio_lim.h:
 
@@ -141,13 +148,15 @@ audio_util.h:
 
 /usr/include/alloca.h:
 
+/usr/include/i386-linux-gnu/bits/stdlib-float.h:
+
 /usr/include/i386-linux-gnu/bits/stdlib.h:
 
 /usr/include/strings.h:
 
 /usr/include/inttypes.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include/stdint.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include/stdint.h:
 
 /usr/include/stdint.h:
 

@@ -1,17 +1,18 @@
 options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
- /usr/include/i386-linux-gnu/bits/predefs.h \
+ /usr/include/stdc-predef.h /usr/include/i386-linux-gnu/bits/predefs.h \
  /usr/include/i386-linux-gnu/sys/cdefs.h \
  /usr/include/i386-linux-gnu/bits/wordsize.h \
  /usr/include/i386-linux-gnu/gnu/stubs.h \
  /usr/include/i386-linux-gnu/gnu/stubs-32.h \
- /usr/lib/gcc/i686-linux-gnu/4.6/include/stddef.h \
+ /usr/lib/gcc/i686-linux-gnu/4.7/include/stddef.h \
  /usr/include/i386-linux-gnu/bits/waitflags.h \
  /usr/include/i386-linux-gnu/bits/waitstatus.h /usr/include/endian.h \
  /usr/include/i386-linux-gnu/bits/endian.h \
- /usr/include/i386-linux-gnu/bits/byteswap.h /usr/include/xlocale.h \
- /usr/include/i386-linux-gnu/sys/types.h \
+ /usr/include/i386-linux-gnu/bits/byteswap.h \
  /usr/include/i386-linux-gnu/bits/types.h \
- /usr/include/i386-linux-gnu/bits/typesizes.h /usr/include/time.h \
+ /usr/include/i386-linux-gnu/bits/typesizes.h \
+ /usr/include/i386-linux-gnu/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/i386-linux-gnu/sys/types.h /usr/include/time.h \
  /usr/include/i386-linux-gnu/sys/select.h \
  /usr/include/i386-linux-gnu/bits/select.h \
  /usr/include/i386-linux-gnu/bits/sigset.h \
@@ -19,47 +20,41 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/i386-linux-gnu/bits/select2.h \
  /usr/include/i386-linux-gnu/sys/sysmacros.h \
  /usr/include/i386-linux-gnu/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/i386-linux-gnu/bits/stdlib-float.h \
  /usr/include/i386-linux-gnu/bits/stdlib.h /usr/include/unistd.h \
  /usr/include/i386-linux-gnu/bits/posix_opt.h \
  /usr/include/i386-linux-gnu/bits/environments.h \
  /usr/include/i386-linux-gnu/bits/confname.h /usr/include/getopt.h \
  /usr/include/i386-linux-gnu/bits/unistd.h /usr/include/fcntl.h \
  /usr/include/i386-linux-gnu/bits/fcntl.h \
+ /usr/include/i386-linux-gnu/bits/fcntl-linux.h \
  /usr/include/i386-linux-gnu/bits/uio.h \
  /usr/include/i386-linux-gnu/bits/stat.h \
  /usr/include/i386-linux-gnu/bits/fcntl2.h /usr/include/glib-2.0/glib.h \
  /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
  /usr/lib/i386-linux-gnu/glib-2.0/include/glibconfig.h \
  /usr/include/glib-2.0/glib/gmacros.h \
- /usr/lib/gcc/i686-linux-gnu/4.6/include-fixed/limits.h \
- /usr/lib/gcc/i686-linux-gnu/4.6/include-fixed/syslimits.h \
+ /usr/lib/gcc/i686-linux-gnu/4.7/include-fixed/limits.h \
+ /usr/lib/gcc/i686-linux-gnu/4.7/include-fixed/syslimits.h \
  /usr/include/limits.h /usr/include/i386-linux-gnu/bits/posix1_lim.h \
  /usr/include/i386-linux-gnu/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/i386-linux-gnu/bits/posix2_lim.h \
  /usr/include/i386-linux-gnu/bits/xopen_lim.h \
  /usr/include/i386-linux-gnu/bits/stdio_lim.h \
- /usr/lib/gcc/i686-linux-gnu/4.6/include/float.h \
+ /usr/lib/gcc/i686-linux-gnu/4.7/include/float.h \
  /usr/include/glib-2.0/glib/gversionmacros.h \
  /usr/include/i386-linux-gnu/bits/timex.h \
  /usr/include/glib-2.0/glib/garray.h \
  /usr/include/glib-2.0/glib/gasyncqueue.h \
  /usr/include/glib-2.0/glib/gthread.h \
  /usr/include/glib-2.0/glib/gatomic.h /usr/include/glib-2.0/glib/gerror.h \
- /usr/lib/gcc/i686-linux-gnu/4.6/include/stdarg.h \
+ /usr/lib/gcc/i686-linux-gnu/4.7/include/stdarg.h \
  /usr/include/glib-2.0/glib/gquark.h \
  /usr/include/glib-2.0/glib/gbacktrace.h /usr/include/signal.h \
  /usr/include/i386-linux-gnu/bits/signum.h \
  /usr/include/i386-linux-gnu/bits/siginfo.h \
  /usr/include/i386-linux-gnu/bits/sigaction.h \
  /usr/include/i386-linux-gnu/bits/sigcontext.h \
- /usr/include/i386-linux-gnu/asm/sigcontext.h /usr/include/linux/types.h \
- /usr/include/i386-linux-gnu/asm/types.h /usr/include/asm-generic/types.h \
- /usr/include/asm-generic/int-ll64.h \
- /usr/include/i386-linux-gnu/asm/bitsperlong.h \
- /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
- /usr/include/linux/stddef.h \
- /usr/include/i386-linux-gnu/asm/posix_types.h \
- /usr/include/i386-linux-gnu/asm/posix_types_32.h \
  /usr/include/i386-linux-gnu/bits/sigstack.h \
  /usr/include/i386-linux-gnu/sys/ucontext.h \
  /usr/include/i386-linux-gnu/bits/sigthread.h \
@@ -77,7 +72,7 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/glib-2.0/glib/gfileutils.h \
  /usr/include/glib-2.0/glib/ggettext.h /usr/include/glib-2.0/glib/ghash.h \
  /usr/include/glib-2.0/glib/glist.h /usr/include/glib-2.0/glib/gmem.h \
- /usr/include/glib-2.0/glib/ghmac.h \
+ /usr/include/glib-2.0/glib/gnode.h /usr/include/glib-2.0/glib/ghmac.h \
  /usr/include/glib-2.0/glib/gchecksum.h \
  /usr/include/glib-2.0/glib/ghook.h \
  /usr/include/glib-2.0/glib/ghostutils.h \
@@ -90,7 +85,7 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/glib-2.0/glib/gmappedfile.h \
  /usr/include/glib-2.0/glib/gmarkup.h \
  /usr/include/glib-2.0/glib/gmessages.h \
- /usr/include/glib-2.0/glib/gnode.h /usr/include/glib-2.0/glib/goption.h \
+ /usr/include/glib-2.0/glib/goption.h \
  /usr/include/glib-2.0/glib/gpattern.h \
  /usr/include/glib-2.0/glib/gprimes.h /usr/include/glib-2.0/glib/gqsort.h \
  /usr/include/glib-2.0/glib/gqueue.h /usr/include/glib-2.0/glib/grand.h \
@@ -129,7 +124,7 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/string.h /usr/include/i386-linux-gnu/bits/string.h \
  /usr/include/i386-linux-gnu/bits/string2.h \
  /usr/include/i386-linux-gnu/bits/string3.h defs.h \
- /usr/include/inttypes.h /usr/lib/gcc/i686-linux-gnu/4.6/include/stdint.h \
+ /usr/include/inttypes.h /usr/lib/gcc/i686-linux-gnu/4.7/include/stdint.h \
  /usr/include/stdint.h /usr/include/i386-linux-gnu/bits/wchar.h globals.h \
  utils.h vcodecs.h jpgenc.h jdatatype.h dct.h lavc_common.h ../config.h \
  sound.h video_format.h avilib.h file_io.h io_stream.h matroska.h \
@@ -156,9 +151,17 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
  acodecs.h string_utils.h v4l2uvc.h /usr/include/linux/videodev2.h \
  /usr/include/i386-linux-gnu/sys/time.h /usr/include/linux/ioctl.h \
  /usr/include/i386-linux-gnu/asm/ioctl.h /usr/include/asm-generic/ioctl.h \
- /usr/include/libudev.h v4l2_devices.h v4l2_formats.h v4l2_controls.h \
- /usr/include/gtk-3.0/gtk/gtk.h /usr/include/gtk-3.0/gdk/gdk.h \
- /usr/include/gtk-3.0/gdk/gdkconfig.h \
+ /usr/include/linux/types.h /usr/include/i386-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/i386-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/i386-linux-gnu/asm/posix_types.h \
+ /usr/include/i386-linux-gnu/asm/posix_types_32.h \
+ /usr/include/asm-generic/posix_types.h /usr/include/linux/v4l2-common.h \
+ /usr/include/linux/v4l2-controls.h /usr/include/libudev.h v4l2_devices.h \
+ v4l2_formats.h v4l2_controls.h /usr/include/gtk-3.0/gtk/gtk.h \
+ /usr/include/gtk-3.0/gdk/gdk.h /usr/include/gtk-3.0/gdk/gdkconfig.h \
  /usr/include/gtk-3.0/gdk/gdkversionmacros.h \
  /usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h \
  /usr/include/glib-2.0/gio/gio.h /usr/include/glib-2.0/gio/giotypes.h \
@@ -251,6 +254,7 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/glib-2.0/gio/gpermission.h \
  /usr/include/glib-2.0/gio/gpollableinputstream.h \
  /usr/include/glib-2.0/gio/gpollableoutputstream.h \
+ /usr/include/glib-2.0/gio/gpollableutils.h \
  /usr/include/glib-2.0/gio/gproxy.h \
  /usr/include/glib-2.0/gio/gproxyaddress.h \
  /usr/include/glib-2.0/gio/gproxyaddressenumerator.h \
@@ -275,8 +279,11 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/glib-2.0/gio/gsocketlistener.h \
  /usr/include/glib-2.0/gio/gsocketservice.h \
  /usr/include/glib-2.0/gio/gsrvtarget.h \
+ /usr/include/glib-2.0/gio/gsimpleproxyresolver.h \
+ /usr/include/glib-2.0/gio/gtask.h \
  /usr/include/glib-2.0/gio/gtcpconnection.h \
  /usr/include/glib-2.0/gio/gtcpwrapperconnection.h \
+ /usr/include/glib-2.0/gio/gtestdbus.h \
  /usr/include/glib-2.0/gio/gthemedicon.h \
  /usr/include/glib-2.0/gio/gthreadedsocketservice.h \
  /usr/include/glib-2.0/gio/gtlsbackend.h \
@@ -394,8 +401,9 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/atk-1.0/atk/atkstateset.h \
  /usr/include/atk-1.0/atk/atkstreamablecontent.h \
  /usr/include/atk-1.0/atk/atktable.h /usr/include/atk-1.0/atk/atkmisc.h \
- /usr/include/atk-1.0/atk/atkvalue.h /usr/include/atk-1.0/atk/atkwindow.h \
- /usr/include/gtk-3.0/gtk/gtkbin.h \
+ /usr/include/atk-1.0/atk/atkvalue.h \
+ /usr/include/atk-1.0/atk/atkversion.h \
+ /usr/include/atk-1.0/atk/atkwindow.h /usr/include/gtk-3.0/gtk/gtkbin.h \
  /usr/include/gtk-3.0/gtk/gtkcontainer.h \
  /usr/include/gtk-3.0/gtk/gtkaccellabel.h \
  /usr/include/gtk-3.0/gtk/gtklabel.h /usr/include/gtk-3.0/gtk/gtkmisc.h \
@@ -505,9 +513,11 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/gtk-3.0/gtk/gtkinfobar.h \
  /usr/include/gtk-3.0/gtk/gtkinvisible.h \
  /usr/include/gtk-3.0/gtk/gtklayout.h \
+ /usr/include/gtk-3.0/gtk/gtklevelbar.h \
  /usr/include/gtk-3.0/gtk/gtklinkbutton.h \
  /usr/include/gtk-3.0/gtk/gtklockbutton.h \
  /usr/include/gtk-3.0/gtk/gtkmain.h /usr/include/gtk-3.0/gtk/gtkmenubar.h \
+ /usr/include/gtk-3.0/gtk/gtkmenubutton.h \
  /usr/include/gtk-3.0/gtk/gtkmenutoolbutton.h \
  /usr/include/gtk-3.0/gtk/gtktoolbutton.h \
  /usr/include/gtk-3.0/gtk/gtktoolitem.h \
@@ -547,6 +557,7 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/gtk-3.0/gtk/gtkscrollable.h \
  /usr/include/gtk-3.0/gtk/gtkscrollbar.h \
  /usr/include/gtk-3.0/gtk/gtkscrolledwindow.h \
+ /usr/include/gtk-3.0/gtk/gtksearchentry.h \
  /usr/include/gtk-3.0/gtk/gtkseparator.h \
  /usr/include/gtk-3.0/gtk/gtkseparatormenuitem.h \
  /usr/include/gtk-3.0/gtk/gtkseparatortoolitem.h \
@@ -605,6 +616,8 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/features.h:
 
+/usr/include/stdc-predef.h:
+
 /usr/include/i386-linux-gnu/bits/predefs.h:
 
 /usr/include/i386-linux-gnu/sys/cdefs.h:
@@ -615,7 +628,7 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/i386-linux-gnu/gnu/stubs-32.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include/stddef.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include/stddef.h:
 
 /usr/include/i386-linux-gnu/bits/waitflags.h:
 
@@ -627,13 +640,15 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/i386-linux-gnu/bits/byteswap.h:
 
-/usr/include/xlocale.h:
-
-/usr/include/i386-linux-gnu/sys/types.h:
-
 /usr/include/i386-linux-gnu/bits/types.h:
 
 /usr/include/i386-linux-gnu/bits/typesizes.h:
+
+/usr/include/i386-linux-gnu/bits/byteswap-16.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/i386-linux-gnu/sys/types.h:
 
 /usr/include/time.h:
 
@@ -653,6 +668,8 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/alloca.h:
 
+/usr/include/i386-linux-gnu/bits/stdlib-float.h:
+
 /usr/include/i386-linux-gnu/bits/stdlib.h:
 
 /usr/include/unistd.h:
@@ -671,6 +688,8 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/i386-linux-gnu/bits/fcntl.h:
 
+/usr/include/i386-linux-gnu/bits/fcntl-linux.h:
+
 /usr/include/i386-linux-gnu/bits/uio.h:
 
 /usr/include/i386-linux-gnu/bits/stat.h:
@@ -687,9 +706,9 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/glib-2.0/glib/gmacros.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include-fixed/limits.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include-fixed/limits.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include-fixed/syslimits.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include-fixed/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -705,7 +724,7 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/i386-linux-gnu/bits/stdio_lim.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include/float.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include/float.h:
 
 /usr/include/glib-2.0/glib/gversionmacros.h:
 
@@ -721,7 +740,7 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/glib-2.0/glib/gerror.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include/stdarg.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include/stdarg.h:
 
 /usr/include/glib-2.0/glib/gquark.h:
 
@@ -736,28 +755,6 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
 /usr/include/i386-linux-gnu/bits/sigaction.h:
 
 /usr/include/i386-linux-gnu/bits/sigcontext.h:
-
-/usr/include/i386-linux-gnu/asm/sigcontext.h:
-
-/usr/include/linux/types.h:
-
-/usr/include/i386-linux-gnu/asm/types.h:
-
-/usr/include/asm-generic/types.h:
-
-/usr/include/asm-generic/int-ll64.h:
-
-/usr/include/i386-linux-gnu/asm/bitsperlong.h:
-
-/usr/include/asm-generic/bitsperlong.h:
-
-/usr/include/linux/posix_types.h:
-
-/usr/include/linux/stddef.h:
-
-/usr/include/i386-linux-gnu/asm/posix_types.h:
-
-/usr/include/i386-linux-gnu/asm/posix_types_32.h:
 
 /usr/include/i386-linux-gnu/bits/sigstack.h:
 
@@ -801,6 +798,8 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/glib-2.0/glib/gmem.h:
 
+/usr/include/glib-2.0/glib/gnode.h:
+
 /usr/include/glib-2.0/glib/ghmac.h:
 
 /usr/include/glib-2.0/glib/gchecksum.h:
@@ -830,8 +829,6 @@ options.o: options.c /usr/include/stdlib.h /usr/include/features.h \
 /usr/include/glib-2.0/glib/gmarkup.h:
 
 /usr/include/glib-2.0/glib/gmessages.h:
-
-/usr/include/glib-2.0/glib/gnode.h:
 
 /usr/include/glib-2.0/glib/goption.h:
 
@@ -939,7 +936,7 @@ defs.h:
 
 /usr/include/inttypes.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.6/include/stdint.h:
+/usr/lib/gcc/i686-linux-gnu/4.7/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -1052,6 +1049,32 @@ v4l2uvc.h:
 /usr/include/i386-linux-gnu/asm/ioctl.h:
 
 /usr/include/asm-generic/ioctl.h:
+
+/usr/include/linux/types.h:
+
+/usr/include/i386-linux-gnu/asm/types.h:
+
+/usr/include/asm-generic/types.h:
+
+/usr/include/asm-generic/int-ll64.h:
+
+/usr/include/i386-linux-gnu/asm/bitsperlong.h:
+
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/include/linux/posix_types.h:
+
+/usr/include/linux/stddef.h:
+
+/usr/include/i386-linux-gnu/asm/posix_types.h:
+
+/usr/include/i386-linux-gnu/asm/posix_types_32.h:
+
+/usr/include/asm-generic/posix_types.h:
+
+/usr/include/linux/v4l2-common.h:
+
+/usr/include/linux/v4l2-controls.h:
 
 /usr/include/libudev.h:
 
@@ -1261,6 +1284,8 @@ v4l2_controls.h:
 
 /usr/include/glib-2.0/gio/gpollableoutputstream.h:
 
+/usr/include/glib-2.0/gio/gpollableutils.h:
+
 /usr/include/glib-2.0/gio/gproxy.h:
 
 /usr/include/glib-2.0/gio/gproxyaddress.h:
@@ -1309,9 +1334,15 @@ v4l2_controls.h:
 
 /usr/include/glib-2.0/gio/gsrvtarget.h:
 
+/usr/include/glib-2.0/gio/gsimpleproxyresolver.h:
+
+/usr/include/glib-2.0/gio/gtask.h:
+
 /usr/include/glib-2.0/gio/gtcpconnection.h:
 
 /usr/include/glib-2.0/gio/gtcpwrapperconnection.h:
+
+/usr/include/glib-2.0/gio/gtestdbus.h:
 
 /usr/include/glib-2.0/gio/gthemedicon.h:
 
@@ -1577,6 +1608,8 @@ v4l2_controls.h:
 
 /usr/include/atk-1.0/atk/atkvalue.h:
 
+/usr/include/atk-1.0/atk/atkversion.h:
+
 /usr/include/atk-1.0/atk/atkwindow.h:
 
 /usr/include/gtk-3.0/gtk/gtkbin.h:
@@ -1803,6 +1836,8 @@ v4l2_controls.h:
 
 /usr/include/gtk-3.0/gtk/gtklayout.h:
 
+/usr/include/gtk-3.0/gtk/gtklevelbar.h:
+
 /usr/include/gtk-3.0/gtk/gtklinkbutton.h:
 
 /usr/include/gtk-3.0/gtk/gtklockbutton.h:
@@ -1810,6 +1845,8 @@ v4l2_controls.h:
 /usr/include/gtk-3.0/gtk/gtkmain.h:
 
 /usr/include/gtk-3.0/gtk/gtkmenubar.h:
+
+/usr/include/gtk-3.0/gtk/gtkmenubutton.h:
 
 /usr/include/gtk-3.0/gtk/gtkmenutoolbutton.h:
 
@@ -1888,6 +1925,8 @@ v4l2_controls.h:
 /usr/include/gtk-3.0/gtk/gtkscrollbar.h:
 
 /usr/include/gtk-3.0/gtk/gtkscrolledwindow.h:
+
+/usr/include/gtk-3.0/gtk/gtksearchentry.h:
 
 /usr/include/gtk-3.0/gtk/gtkseparator.h:
 

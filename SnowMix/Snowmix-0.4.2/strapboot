@@ -1,0 +1,29 @@
+#!/bin/sh
+if [ -f src/Makefile ] ; then
+  cd src
+  make distclean
+  cd ..
+fi
+rm -r Makefile		\
+	INSTALL		\
+	Makefile.in	\
+	aclocal.m4	\
+	autom4te.cache	\
+	configure	\
+	config.guess	\
+	config.sub	\
+	config.log	\
+	config.status	\
+	depcomp		\
+	install-sh	\
+	ltmain.sh 	\
+	libtool		\
+	m4		\
+	missing		\
+  	src/Makefile.in
+
+for dir in .deps .libs src/.libs src/.deps ; do
+  if [ -d $dir ] ; then
+    rm -rf $dir
+  fi
+done

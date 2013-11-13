@@ -1,0 +1,200 @@
+		THIS FILE IS OBSOLETE. PLEASE LOOK AT
+
+	https://sourceforge.net/p/snowmix/wiki/Video%20Text/
+
+		THIS FILE IS OBSOLETE. PLEASE LOOK AT
+
+	https://sourceforge.net/p/snowmix/wiki/Video%20Text/
+
+		See Also the Text Tutorial on YouTube
+
+	     http://www.youtube.com/watch?v=S4g2hCKSClw
+	     http://www.youtube.com/watch?v=tCqFqsZ5rjE
+	     http://www.youtube.com/watch?v=V_i6P6P2G6w
+	     http://www.youtube.com/watch?v=AonjRPmOR-Y
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+Tips and tricks for adding and manipulating text displayed on the mixer output
+Content:
+
+    Overview - Text related commands:
+    Text Add, List and Delete:
+    Text font Add, List and Delete:
+    How to place text on to the mixer output:
+    How to change text from an external program:
+    How to change the color of a text already placed on mixer output:
+    How to create scrolling text
+    How to add a time counter
+    How to add a background rectangle to text:
+
+Text related commands:
+
+The following commands are available for manipulating text on the mixer output:
+
+    text string [<id no> [<string>]]
+    text font [<id no> [<string>]]
+    text place [<id no> | <text_id> <font_id> <x> <y> [<red> <green> <blue>]]]
+    text place rgb <id no> <red> <green> <blue>
+    text place repeat move <id no> <dx> <dy> <end x> <end y>
+
+These commands are available either via ini config file or console or network control port.
+Text Add, List and Delete:
+
+The 'text string' can be used to create text strings as shown here:
+
+    text string 0 My text
+
+The command defines a text string with text id 0 and string content being 'My text'.
+
+The command 'text string 0' deletes the text string with text id 0, if it exists.
+
+The command 'text string' used alone list the defined text strings and their associated text id number.
+Text font Add, List and Delete:
+
+The 'text font' behaves exactly as for 'text string' for creating, deleting and listing font definitions as shown here:
+
+    text font 0 Sans Bold 12
+
+defines a font with font id 0 being 'Sans Bold 12'. Use a font manager to see what fonts are available on your system.
+
+The command to list fonts defined with 'text font' is
+
+    text font
+
+To delete a font definition, use the command
+
+    text font 0
+
+which deletes font defintion with font id 0, if it exists.
+How to place text on to the mixer output:
+
+The command 'text place' can be used to place text strings defined with 'text string' on the mixer output (display) using the font defined using the command 'text font'.
+
+1) Have the mixer running with input and output
+2) Add a text at 180,0 by using the commands either via ini config file or console or network control port
+
+    text string 0 Some Text
+    text font 0 Sans Bold 12
+    text place 0 0 180 0 0.0 0.0 0.0
+
+The command first defines a text string 'Some Text' with text id 0. Then the font 'Sans Bold 12 is defined as font id 0. Then the text id 0 font id 0 is placed at 180,0 with rgb=0.0,0.0,0.0
+
+The command 'text place' lists the text place definitions created if any.
+
+The command 'text place removes a specific text placed on the mixer output, but the text definition is kept unchanged. The specific number can be found using the command 'text place'.
+How to change text from an external program:
+
+1) Have the mixer running with input and output
+2) Add a text somewhere by using the commands given in previous example. We assume in this example the text id is '0'
+
+Now the text string with text id 0 can be manipulated outside the mixer running the shell script assuming the mixers control port is 9999
+
+    $ while true
+          do
+            (echo -n 'text string 0 ' ;date '+%a %b %d %H:%M:%S') | nc 127.0.0.1 9999
+                sleep 1
+          done
+
+Of course this will also work from a remote machine substituting the 127.0.0.1 with the IP address of the mixer machine.
+
+If no text and font was defined beforehand nor the text was placed, the following script deals with that.
+
+    $ (
+        echo 'text string 0 mytext'
+        echo 'text font 0 Sans Bold 12'
+        echo 'text place 0 0 0 0 0 0.0 0.0 0.0 n'
+        echo 'text place align 0 center top'
+      ) | nc 127.0.0.1 9999
+
+and can be run before the other script presented. The text place command explained is
+
+    - use text place id 0
+    - take text from text id 0
+    - take font from text font id 0
+    - place text at 0,0
+    - use color 0.0 0.0 0.0, which is black
+    - When placing text at 0,0, add an offset of (half width, 0) which is what the letter 'n' says (n=north)
+
+The 'text align command define the placement to anchored at center,top of the text string. All in all the text will be placed aligned to center top of the master frame. Centering a text will look a little bit akward if a variable width font (as most are) is used.
+How to change the color of a text already placed on mixer output:
+
+Use the command 'text place' to identify the of the text for which the color may be changed. Assuming the place id of a text is 6, then use the following command to change the color of the text:
+
+    text place rgb 6 1.0 1.0 1.0
+
+The example sets the color to white. Black is '0.0 0.0 0.0' and other colors are a mix of various 3 set of numbers between 0.0 and 1.0 defining the red, the green and the blue component.
+How to create scrolling text:
+
+Assume our mixer output display is 1024x5766.
+
+First we define one or more text string. Here we define two.
+
+    text string 5 Lost Signal
+    text string 6 This is a very long message that contains absolutely garbage and nonsense plus no additional information what so ever
+
+Then we define one or more fonts to be used. Here we define two.
+
+    text font 3 Sans Bold 16
+    text font 4 Purisa Bold 14
+
+The we place the text or texts on display
+
+    text place 0 5 4 800 490 0.2 0.2 0.2
+    text place 1 6 3 1022 530 0.8 0.8 0.8
+
+Here we place text string 5 at 800,490 using text font 4 and some gray'ish color. Then we place text string 6 at 1022,530, which is almost outside the left side of the display. The text font used is font id 3 and the color is almost white. Then we issue the move commands
+
+    text place repeat move 0 0 -1 800 420
+    text place repeat move 1 -2 0 -1400 530
+
+First we set placed text with place id 0 to have a delta_x of 0 and a delta y of -1 meaning the text will move up. The text will move from its position at 800,490 to 800,420 by one pixel per frame produced. When it has reached 800,420, it will move to 800,490 on the next frame and again move up by one pixel per frame.
+
+The second example will produce a banner text moving from 1022,530 to -1400,530 moving left by 2 pixels per frame. As the banner text starts largely outside the right side of the display moving left until it is largely outside the left side of the display, before it starts over again.
+
+The content and the behaviour of the scrolling text can be controlled by an external program or script, as shown for the running clock script example
+
+To remove the scrolling effect of the placed text, the following commands can be executed
+
+    text place repeat move 5
+    text place repeat move 6
+
+To list 'text place move' settings, the following can be used:
+
+    text place repeat move
+
+How to add a time counter:
+
+If a text string contains the string [#RUNTIME], this part of the string will be replaced by a counter in the format h:mm:ss.fff indicating time elapsed since start of the video mixer. fff is here 3 digits indicating milliseconds. The example below show how to use this function
+
+    text string 0 Time : [#RUNTIME]
+    text font 0 Sans Bold 12
+    text place 0 0 180 0 0.0 0.0 0.0
+
+The string 'Time : 0:00:00.000' will be placed at 180,0 using text font Sans Bold 12 and color black (0,0,0)
+How to add a background rectangle to text:
+
+To add a background to a placed text, the following command can be used
+
+    text string 0 Rocket Cam
+    text font 0 Sans Bold 12
+    text place 0 0 0 180 0 0.0 0.0 0.0
+
+Then you can use the following command to add the rectangle
+
+    text place 0 2 4 -2 10 1 1 1 1
+
+This will add a solid rectangle the size of the text string plus 2 pixels left padding, 4 pixels right padding, -2 pixels top padding and 10 pixels bottom padding. The rectangle will be white (1,1,1) and solid as alpha is 1. If you want to have a shaded background instead, use the command
+
+    text place 0 2 4 -2 10 1 1 1 0.3
+
+which will give a 30% alpha blend with the background. The syntax for the command is
+
+    text place backgr [<id no> [ <l_pad> <r_pad> <t_pad> <b_pad>
+                                           [<red> <green> <blue> <alpha>]]]
+
+

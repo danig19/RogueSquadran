@@ -1,0 +1,399 @@
+# Virtual Feeds Settings
+# Copyright by Peter Maersk-Moller 2012 - All rights reserved
+#verbose
+
+# Listen on port 9999 for command control connections
+port 9999
+
+# Set system Geometry to 1024x576
+geometry 1024 576 ARGB
+
+# Set system frame rate to 24
+frame rate 24
+
+# Set output control socket
+socket /tmp/mixer1
+
+# Set feed idle time - feed 0 will always be idle. If no file is given,
+# idle image will be all black.
+#feed idle 0 1 dead-1024x576.argb
+feed idle 0 1 
+
+# Define feed #1, set geometry to 704x576, define as live, set idle time
+# to 100 frames and set idle image, scale to 1/2 and specify control socket.
+# Furthermore the feed is defined as live meaning Snowmix will drop frames if
+# it is late.
+feed add 1 Feed #1
+feed geometry 1 704 576
+feed live 1
+feed idle 1 100 ../frames/dead-704x576.argb
+feed scale 1 1 2
+feed socket 1 /tmp/feed1-control-pipe
+
+# Define feed #2, set geometry to 704x576, define as live, set idle time
+# to 100 frames and set idle image, scale to 1/2 and specify control socket
+# Furthermore the feed is defined as live meaning Snowmix will drop frames if
+# it is late.
+feed add 2 Feed #2
+feed geometry 2 704 576
+feed live 2
+feed idle 2 100 ../frames/dead-704x576.argb
+feed scale 2 1 2
+feed socket 2 /tmp/feed2-control-pipe
+
+# Define feed #3, set geometry to 704x576, define as live, set idle time
+# to 100 frames and set idle image, scale to 1/2 and specify control socket
+# Furthermore the feed is defined as live meaning Snowmix will drop frames if
+# it is late.
+feed add 3 Feed #3
+feed geometry 3 704 576
+feed live 3
+feed idle 3 100 ../frames/dead-704x576.argb
+feed scale 3 1 2
+feed socket 3 /tmp/feed3-control-pipe
+
+# Define feed #3, set geometry to 704x576, define as live, set idle time
+# to 100 frames and set idle image, set scaling to 1/1 and specify control
+# socket. AFurthermore the feed is defined as live meaning Snowmix will drop
+# frames if it is late.
+feed add 4 Feed #4 1024x576
+feed geometry 4 1024 576
+feed live 4
+feed idle 4 100 ../frames/dead-1024x576.argb
+feed scale 4 1 1
+feed socket 4 /tmp/feed4-control-pipe
+
+
+# Stack (overlay) feed 0. Feed 0 has previously been set to black.
+stack  0
+
+# Load a transparent image and place it at 4,4
+image load 0 ../images/CS_logo-white-64x64.png
+image place 0 0 4 4
+
+# Define some text strings identified by their text id.
+text string 0 Snowmix Virtual Feed Setup 2 by Peter Maersk-Moller
+text string 1 This is feed #4
+text string 2 This is feed #1
+text string 3 This is feed #2
+text string 4 This is feed #3
+text string 5 This is a very long message that contains absolutely garbage and nonsense plus no additional information what so ever
+text string 6 [#RUNTIME]
+text string 7 [#DATETIME] CET
+text string 10 [#FEEDSTATE,2,RUNNING]Running 2
+text string 11 [#FEEDSTATE,2,PENDING]Pending 2
+text string 12 [#FEEDSTATE,2,STALLED]Stalled 2
+text string 13 [#FEEDSTATE,2,DISCONNECTED]Lost Signal 2
+
+# This defines 3 font selections identified by their font id
+text font 0 Sans Bold 8
+text font 1 Sans Bold 12
+text font 2 Sans Bold 14
+text font 0 Sans Bold 7
+
+# text place <place id> <text id> <font id> <x> <y> <red> <green> <blue> <achor>
+text place 0 0 0 4 -4 1.0 1.0 1.0 1.0 sw
+text place align 0 left bottom
+text place backgr 0 20 40 2 4 0 0 0 1.0
+text place backgr linpat 0 0.00 0.0 0.0 0.0 1.0
+text place backgr linpat 0 0.86 0.0 0.0 0.0 1.0
+text place backgr linpat 0 0.92 0.0 0.0 0.0 0.5
+text place backgr linpat 0 1.00 0.0 0.0 0.0 0.0
+
+# This places the header text for feed 4 aligned at center,top. The 'nw'
+# reference means counting from north-west (0,0). Text background is added
+# extending 20 pixels to the left and right and 2 pixels at the top and bottom.
+# The text background is made out linear pattern defined from 0% over 10%, 50%
+# 90% to 100%. Furthermore the linear pattern is defines as vertical 'v'.
+text place 1 1 2 352 0 1.0 1.0 1.0 1.0 nw
+text place align 1 center top
+text place backgr 1 20 20 2 2 0 0 0 0.3
+text place backgr linpat 1 0.00 .239 .239 .239 0.0 v
+text place backgr linpat 1 0.10 .439 .439 .439 0.7 v
+text place backgr linpat 1 0.45 .839 .839 .839 0.9 v
+text place backgr linpat 1 0.85 .439 .439 .439 0.7 v
+text place backgr linpat 1 1.00 .039 .039 .039 0.0 v
+
+# This places the header text for feed 1 aligned at center,top. The 'nw'
+# reference means counting from north-west (0,0). Text background is added
+# extending 15 pixels to the left and right.
+# The text background is made out linear pattern defined from 0% over 10%, 90%
+# to 100%. Furthermore the linear pattern is defines as horizontal 'h' though
+# the letter 'h' has been omitted at the end of the linear pattarn definition
+# as it is the default orientation
+text place 2 2 1 864 0 1.0 1.0 1.0 1.0 nw
+text place align 2 center top
+text place backgr 2 15 15 0 0 0 0 0 0.3
+text place backgr linpat 2 0.00 1.0 0.0 0.0 0.0
+text place backgr linpat 2 0.10 1.0 0.0 0.0 0.5
+text place backgr linpat 2 0.90 1.0 0.0 0.0 0.5
+text place backgr linpat 2 1.00 1.0 0.0 0.0 0.0
+
+# This places the header text for feed 2 aligned at center,top. The 'nw'
+# reference means counting from north-west (0,0). Text background is added
+# extending 15 pixels to the left and right.
+# The text background is made out linear pattern defined from 0% over 10%, 90%
+# to 100%. Furthermore the linear pattern is defines as horizontal 'h' though
+# the letter 'h' has been omitted at the end of the linear pattarn definition
+# as it is the default orientation
+text place 3 3 1 864 192 0.2 0.2 0.2 1.0 nw
+text place align 3 center top
+text place backgr 3 15 15 0 0 0 0 0 0.3
+text place backgr linpat 3 0.00 1.0 1.0 0.0 0.0
+text place backgr linpat 3 0.10 1.0 1.0 0.0 0.5
+text place backgr linpat 3 0.90 1.0 1.0 0.0 0.5
+text place backgr linpat 3 1.00 1.0 1.0 0.0 0.0
+
+# This places the header text for feed 3 aligned at center,top. The 'nw'
+# reference means counting from north-west (0,0). Text background is added
+# extending 15 pixels to the left and right.
+# The text background is made out linear pattern defined from 0% over 10%, 90%
+# to 100%. Furthermore the linear pattern is defines as horizontal 'h' though
+# the letter 'h' has been omitted at the end of the linear pattarn definition
+# as it is the default orientation
+text place 4 4 1 864 384 1.0 1.0 1.0 1.0 nw
+text place align 4 center top
+text place backgr 4 15 15 0 0 0 0 0 0.3
+text place backgr linpat 4 0.00 0.0 1.0 1.0 0.0
+text place backgr linpat 4 0.10 0.0 1.0 1.0 0.5
+text place backgr linpat 4 0.90 0.0 1.0 1.0 0.5
+text place backgr linpat 4 1.00 0.0 1.0 1.0 0.0
+
+# This places the very long left scrolling text. The text is placed relative
+# to south-east 'se' meaning 1024,576. A flat semi transparent gray'ish text
+# back ground is added. Last but not least, the text is set to move 2 pixels
+# to the left from its start position until it reaches x=-2700. Then it moves
+# back to its start position and starts over.
+text place 5 5 1 0 0 0.8 0.8 0.8 1.0 se
+text place align 5 left bottom
+text place backgr 5 1024 2400 0 0 0 0 0 0.3
+text place repeat move 5 -2 0 -2700 0
+
+# This places text id 6 relative to the south-east (right-bottom)
+# corner. Text id 6 is defined as a video timer clock
+text place 6 6 1 -110 0 0.8 0.8 0.8 1.0 se
+text place align 6 left bottom
+text place backgr 6 15 15 0 0 0 0 0 1.0
+
+# This places text id 7 relative to the north-east (right-top)
+# corner. Text id 7 is defined as a date and time clock
+text place 7 7 0 -160 190 0.8 0.8 0.8 1.0 ne
+text place align 7 center bottom
+text place backgr 7 15 15 0 0 0 0 0 0.3
+
+# The next 4 entries places the conditional text. Text id 10-13 has been
+# defined as conditional text showing the feed state.
+text place 10 10 1 860 288 0.4 0.4 0.4
+text place 11 11 1 860 288 0.4 0.4 0.4
+text place 12 12 1 860 288 0.4 0.4 0.4
+text place 13 13 1 860 288 0.4 0.4 0.4
+text place align 10 center middle
+text place align 11 center middle
+text place align 12 center middle
+text place align 13 center middle
+
+# The first 12 frames nothing is done, then 4 texts are moved outside the frame
+# and nothing is done for the next 20 frames. Then the text is moved back
+# into the frame and the command is looped.
+command create Blink_Feed_2_State
+  nextframe 12
+  text place 10 10 1 1860 288 0.4 0.4 0.4
+  text place 11 11 1 1860 288 0.4 0.4 0.4
+  text place 12 12 1 1860 288 0.4 0.4 0.4
+  text place 13 13 1 1860 288 0.4 0.4 0.4
+  nextframe 20
+  text place 10 10 1 860 288 0.4 0.4 0.4
+  text place 11 11 1 860 288 0.4 0.4 0.4
+  text place 12 12 1 860 288 0.4 0.4 0.4
+  text place 13 13 1 860 288 0.4 0.4 0.4
+  text place align 10 center middle
+  text place align 11 center middle
+  text place align 12 center middle
+  text place align 13 center middle
+  loop
+command end
+
+virtual feed add 1 Feed #1
+virtual feed source feed 1 1
+virtual feed add 2 Feed #2
+virtual feed source feed 2 2
+virtual feed add 3 Feed #3
+virtual feed source feed 3 3
+virtual feed add 4 Feed #4
+virtual feed source feed 4 4
+virtual feed place rect 1 704 0 320 192 16 48 0.0 0.5 0.5 1.0
+virtual feed place rect 2 704 192 320 192 16 48 0.0 0.5 0.5 1.0
+virtual feed place rect 3 704 384 320 192 16 48 0.0 0.5 0.5 1.0
+virtual feed place rect 4 0 0 704 576 160 0 0.0 1.0 1.0 1.0
+
+command create feed_5
+  virtual feed add 5 Feed #5
+  virtual feed source feed 5 1
+  loop
+command end
+
+command create feed_6
+  virtual feed add 6 Feed #6
+  virtual feed source feed 6 2
+  loop
+command end
+
+command create feed_7
+  virtual feed add 7 Feed #7
+  virtual feed source feed 7 3
+  loop
+command end
+
+command create rotate_feed_1
+  nextframe 100
+  virtual feed move coor 1 10 0 40 0
+  text place move coor 2 10 0 40 0
+  nextframe 100
+  virtual feed move coor 1 -10 0 40 0
+  text place move coor 2 -10 0 40 0
+  nextframe 100
+  virtual feed move rotation 1 -0.0314 100
+  nextframe 100
+  virtual feed move rotation 1 0.0 0
+  nextframe 75
+  virtual feed move rotation 1 0.0314 100
+  nextframe 100
+  loop
+command end
+command create move_feed_2
+  nextframe 100
+  virtual feed move coor 2 10 0 40 0
+  text place move coor 3 10 0 40 0
+  nextframe 39
+  nextframe 60
+  virtual feed move coor 2 -10 0 40 0
+  text place move coor 3 -10 0 40 0
+  nextframe 40
+  text place 3 3 1 864 192 0.2 0.2 0.2 nw
+  text place align 3 center top
+  loop
+command end
+command create rotate_feed_3
+  nextframe 100
+  virtual feed move coor 4 10 0 40 0
+  text place move coor 4 10 0 40 0
+  nextframe 100
+  virtual feed move coor 3 -10 0 40 0
+  text place move coor 4 -10 0 40 0
+  nextframe 40
+  text place coor 2 864 0
+  nextframe 60
+  virtual feed move rotation 3 0.0314 100
+  nextframe 100
+  #virtual feed move rotation 3 0.0 0
+  virtual feed place rect 3 704 384 320 192 16 48 0.0 0.5 0.5 1.0
+  #nextframe 100
+  #virtual feed move rotation 3 -0.0314 101
+  #nextframe 101
+  #virtual feed move rotation 3 0.0 0
+  loop
+command end
+command create scale_feed_4
+  nextframe 100
+  text place move coor 5 0 -2 0 200
+  virtual feed move clip 4 -6 0 12 0 40 40 40 40
+  nextframe 100
+  virtual feed move clip 4 6 0 -12 0 40 40 40 40
+  nextframe 200
+  text place move coor 5 0 2 0 200
+  virtual feed place rect 4 0 0 704 576 80 0 0.0 1.0 1.0 1.0
+  virtual feed move scale 4 -0.0125 -0.0125 40 40
+  virtual feed move clip 4 0 0 -9 -8 0 0 39 36
+  nextframe 40
+  virtual feed place rect 4 0 0 352 288 80 0 0.0 0.5 0.5 1.0
+  nextframe 60
+  feed_5
+  nextframe 25
+  virtual feed place rect 5 352 0 352 288 0 0   0.0 0.5 0.5 1.0
+  nextframe 25
+  feed_6
+  virtual feed place rect 6 352 288 352 288 0 0 0.0 0.5 0.5 1.0
+  nextframe 25
+  feed_7
+  virtual feed place rect 7 0 288 352 288 0 0 0.0 0.5 0.5 1.0
+  nextframe 25
+  virtual feed add 5
+  virtual feed add 6
+  virtual feed add 7
+  
+  virtual feed move scale 4 0.0125 0.0125 20 00
+  virtual feed move clip 4 0 0 9 8 0 0 20 00
+  nextframe 20
+  virtual feed move scale 4 0.0125 0.0125 0 20
+  virtual feed move clip 4 0 0 9 8 0 0 00 18
+  nextframe 20
+  virtual feed move scale 4 0.0125 0.0125 20 00
+  virtual feed move clip 4 0 0 9 8 0 0 19 00
+  nextframe 20
+  virtual feed move scale 4 0.0125 0.0125 00 20
+  virtual feed move clip 4 0 0 9 8 0 0 00 18
+  nextframe 20
+  virtual feed place rect 4 0   0   704 576 160 0 0.0 1.0 1.0 1.0
+  nextframe 20
+  tcl exec tcl_script
+  nextframe 200
+  loop
+command end
+
+# This will make the text grow from left to right
+command create grow_text
+  nextframe 100
+  text place grow 0 0 5
+  nextframe 100
+  text place grow 1 1
+  nextframe 100
+  text place grow 2 1
+  nextframe 100
+  text place grow 3 1
+  nextframe 100
+  text place grow 4 1
+  loop
+command end
+
+
+# This is the definition of the command 'Show'. The command (script)
+# says first to execute command (script) Blink_Feed_2_State which is defined
+# below. It then overlays text place id 1 and 3, then 2 and 4 until end of
+# text place ids. Then text place id is placed last to place it ontop of
+# other text, in this case to overlay it the scrolling text
+# The 'loop' command is essential and tells Snowmix to loop the command,
+# to point at the start of the command before next frame..
+command create Show
+  rotate_feed_1
+  move_feed_2
+  rotate_feed_3
+  scale_feed_4
+  overlay virtual feed 1
+  overlay virtual feed 2..7
+  overlay image 0
+  Blink_Feed_2_State
+  grow_text
+  overlay text 1 3
+  overlay text 2 4..end
+  overlay text 0
+  loop
+command end
+
+# This is a pure Tcl script that returns a single command
+command create tcl_script
+  set x 100
+  set y 100
+  set width 512
+  set height 288
+  set id 4
+  set rotation 0.0
+  set scale_x [expr $width / 1024.0]
+  set scale_y [expr $height / 576.0]
+  return [format "\nvirtual feed place rect %d %d %d %d %d 0 0 %f %f %f 1.0" $id $x $y $width $height $rotation $scale_x $scale_y]
+command end
+
+# >>>>>>>>>>>>>>>>>> I M P O R T A N T <<<<<<<<<<<<<<<<<<<<<<<
+# This command tells Snowmix to run the command 'Show' for each frame after
+# feeds have been stacked as defined by the 'stack command'
+overlay finish Show
+# >>>>>>>>>>>>>>>>>> I M P O R T A N T <<<<<<<<<<<<<<<<<<<<<<<

@@ -1,0 +1,7 @@
+SUBDIRS = src
+
+include_HEADERS =
+
+EXTRA_DIST = bootstrap NEWS README Changelog AUTHORS INSTALL COPYING scripts test
+
+ACLOCAL_AMFLAGS = -I m4

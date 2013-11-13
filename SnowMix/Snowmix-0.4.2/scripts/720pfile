@@ -1,0 +1,23 @@
+#!/bin/bash
+# Deliver mixer1 output to screen.
+
+MIXERFORMAT='video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, format=(fourcc)BGRA, red_mask=(int)65280, green_mask=(int)16711680, blue_mask=(int)-16777216, width=(int)1024, height=(int)576, framerate=(fraction)24/1, pixel-aspect-ratio=(fraction)1/1, interlaced=(boolean)false'
+
+i=0
+file=snowmix-$i.mp4
+while true ; do
+  if [ -s $file ] ; then
+    i=`expr $i + 1`
+    file=snowmix-$i.mp4
+  else
+    gst-launch-0.10 -e -v shmsrc socket-path=/tmp/mixer1 do-timestamp=true is-live=true ! \
+    	$MIXERFORMAT            ! \
+	videoscale		! \
+	'video/x-raw-rgb, width=1280, height=720' ! \
+    	ffmpegcolorspace        ! \
+    	x264enc bitrate=5000 tune=zerolatency speed-preset=5 ! \
+    	avimux		    ! \
+    	filesink location=$file
+    sleep 1
+  fi
+done

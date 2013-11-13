@@ -1,0 +1,26 @@
+# Basic Feeds Settings
+# Copyright by Peter Maersk-Moller 2013 - All rights reserved
+# verbose
+require version 0.4.1
+
+tcl eval FeedCreate "Feed #1" 1 1280 720 /tmp/feed1-control-pipe
+tcl eval FeedCreate "Feed #2" 2 1280 720 /tmp/feed2-control-pipe
+tcl eval FeedCreate "Feed #3" 3 1280 720 /tmp/feed3-control-pipe
+tcl eval FeedCreate "Feed #4" 4  704 576 /tmp/feed4-control-pipe
+tcl eval FeedCreate "Feed #5" 5 1280 720 /tmp/feed5-control-pipe
+tcl eval FeedCreate "Feed #6" 6 1280 720 /tmp/feed6-control-pipe
+tcl eval FeedCreate "Feed #7" 7 1280 720 /tmp/feed7-control-pipe
+tcl eval FeedCreate "Feed #8" 8  704 576 /tmp/feed8-control-pipe
+tcl eval FeedCreate "Feed #9" 9 1280 720 /tmp/feed9-control-pipe
+tcl eval SetFeedPAR 4 12 11
+tcl eval SetFeedPAR 8 12 11
+tcl eval SetFeedDeadImage 0 1 ../frames/CS_TV_720p_background.bgra
+tcl eval SetFeedDeadImage 1 100 ../frames/dead-1280x720.bgra
+tcl eval SetFeedDeadImage 2 100 ../frames/dead-1280x720.bgra
+tcl eval SetFeedDeadImage 3 100 ../frames/dead-1280x720.bgra
+tcl eval SetFeedDeadImage 4 100 ../frames/dead-704x576.bgra
+tcl eval SetFeedDeadImage 5 100 ../frames/dead-1280x720.bgra
+tcl eval SetFeedDeadImage 6 100 ../frames/dead-1280x720.bgra
+tcl eval SetFeedDeadImage 7 100 ../frames/dead-1280x720.bgra
+tcl eval SetFeedDeadImage 8 100 ../frames/dead-704x576.bgra
+tcl eval SetFeedDeadImage 9 100 ../frames/dead-1280x720.bgra

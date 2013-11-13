@@ -1,0 +1,110 @@
+	    THIS FILE IS OBSOLETE. FIND THE LATEST INFORMATION ON
+
+		http://www.sourceforge.net/p/snowmix/wiki/Home
+
+
+To see updated requirements and updated how to install Snowmix, please visit
+https://sourceforge.net/p/snowmix/wiki/Compiling%20and%20Installing/
+
+			PLEASE SEE THE RELEASE NOTES.
+
+===============================================================================
+
+Requirements:
+
+The following packages may have to be installed to a fresh installaion of Ubuntu 12.04 i386 server. This has also now been verified for Ubuntu 12.04 amd64 desktop.
+
+    build-essential
+    automake
+    libtool
+    pkg-config
+    g++
+    libgtk+-3.0 libgtk-3-dev
+    libgstreamer0.10-dev gstreamer-tools
+    libsdl1.2-dev
+    libosmesa6-dev
+    tcl-dev
+    gstreamer-tools
+
+Installing these packages can be done by executing
+
+	$ sudo apt-get install build-essential automake autoconf libtool g++ pkg-config libgtk-3-dev gtk+-3.0 libsdl1.2-dev tcl-dev libosmesa6-dev gstreamer-tools libgstreamer0.10-dev
+
+To install and run demo, please execute the following commands (here for version 0.4.1):
+
+	$ tar -xzvf Snowmix-0.4.1
+	$ cd Snowmix-0.4.1
+	$ sh bootstrap
+	$ ./configure
+	$ make
+	$ cd scripts
+	$ bash demo
+
+You may choose to run
+
+	$ sh strapboot
+
+to clean everything up before you run bootstrap.
+
+Use './configure -help' to see options for changing installation dir among others
+
+How to test something else than demo - DO NOT RUN AS root
+
+	In the snowmix directory
+	$ cd src
+	$ ./snowmix ../ini/basic_feeds
+
+	Now for Snowmix to work, you need to feed it some live feeds. Below
+	is shown how you can simulate 4 inputs. The following commands are
+	all excuted from the scripts directory (snowmix/scripts)
+
+	$ cd sripts
+	$ xterm -e sh input2feed1-704 &
+	$ xterm -e sh input2feed2-704 &
+	$ xterm -e sh input2feed3-704 &
+	$ xterm -e sh input2feed4-1024 &
+	$ xterm -e sh output2screen &
+
+	The last command starts a GStreamer pipeline that reads from output
+	of Snowmix and display to screen.
+
+	In the original window, where you started Snowmix, you can now
+	type commands. To begin with, you can type 'help' and press
+	return. Type 'quit' when you want to stop Snowmix. If you terminate
+	Snowmix in any other way, some of the shared memory allocated
+	will stay allocate and build up until you can not start Snowmix
+	again. Allocated shared memory can be found listed in /run/shm
+	and can be deallocated by deleting files in there. However if
+	you don't know what you are doing, bets are you will create
+	problems for you and your machine.
+	
+
+	Running Snowmix with the ini file basic_feeds sets up four feeds
+	and display them with some additional text and images.
+
+	If you want to test the capability of virtual feeds instead of
+	basic feeds, you can quit Snowmix and start it again with one
+	of the ini files
+
+		- ini/virtual_feeds
+		- ini/virtual_feeds_2
+
+	However, when you quit Snowmix, you will either have to restart
+	all your input feeds (the scripts you started before) or wait until
+	they starts over (which they in this example do after 2 minutes,
+	as the clip they play are 2 minutes long approx.). Should be trivial
+	to do a 'killall -1 gst-launch' or automate i other ways, but that
+	is up to YOU!.
+
+
+How to install (you may have to run as root depending on install destination)
+
+	In the snowmix directory
+	$ cd src
+	$ make install
+
+
+How to get more information:
+
+	Follow Snowmix on Sourceforge
+	http://www.sourceforge.net/p/snowmix/wiki/Home

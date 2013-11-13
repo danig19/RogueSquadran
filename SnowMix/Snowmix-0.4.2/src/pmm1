@@ -1,0 +1,11 @@
+Snowmix version 0.4.1
+ - Parse4IfElseEndif ERROR for <if { $hours > 99 } { set hours 99 } >
+TCL INIT OK
+MSG: <0><Digital Counter Init >
+MSG: audio sink verbose level set to 0 for CAudioSink
+Pattern 1
+MSG: shape verbose level set to 1 for CVideoShape
+MSG: verbose is on
+Host allow. Host allowed ? yes
+Host allow. Host allowed ? yes
+Closed output handle

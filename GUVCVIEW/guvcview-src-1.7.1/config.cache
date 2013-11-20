@@ -90,7 +90,7 @@ gt_cv_func_dgettext_libc=${gt_cv_func_dgettext_libc=yes}
 gt_cv_func_dgettext_libintl=${gt_cv_func_dgettext_libintl=no}
 gt_cv_func_ngettext_libc=${gt_cv_func_ngettext_libc=yes}
 gt_cv_have_gettext=${gt_cv_have_gettext=yes}
-pkg_cv_DEPS_CFLAGS=${pkg_cv_DEPS_CFLAGS='-pthread -D_GNU_SOURCE=1 -D_REENTRANT -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/SDL  '}
+pkg_cv_DEPS_CFLAGS=${pkg_cv_DEPS_CFLAGS='-pthread -D_GNU_SOURCE=1 -D_REENTRANT -I/usr/include/gtk-3.0 -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/SDL  '}
 pkg_cv_DEPS_LIBS=${pkg_cv_DEPS_LIBS='-lgtk-3 -lgdk-3 -latk-1.0 -lgio-2.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo-gobject -lpango-1.0 -lcairo -lgobject-2.0 -lglib-2.0 -lSDL -lportaudio -lasound -lm -lpthread -lpng12 -lavcodec -lavutil -lv4l2 -ludev -lrt  '}
 pkg_cv_PULSE_CFLAGS=${pkg_cv_PULSE_CFLAGS='-D_REENTRANT  '}
 pkg_cv_PULSE_LIBS=${pkg_cv_PULSE_LIBS='-lpulse  '}

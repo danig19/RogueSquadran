@@ -1,5 +1,0 @@
-#!/bin/bash
-vlc -I dummy --tcp-caching 0	\
-	tcp@://127.0.0.1:5010	\
-	vlc://quit		\
-	--sout='#standard{access=livehttp{seglen=10,delsegs=true,numsegs=5,index=/var/www/recordings/mystream.m3u8,index-url=http://193.88.237.22/recordings/mystream-########.ts},mux=ts{use-key-frames},dst=/var/www/recordings/mystream-########.ts}'

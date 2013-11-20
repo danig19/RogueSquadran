@@ -1,9 +1,0 @@
-#!/bin/bash
-
-AUDIOFORMAT='audio/x-raw-int, endianness=(int)1234, signed=(boolean)true, width=(int)16, depth=(int)16, rate=(int)44100, channels=(int)1'
-MIXERFORMAT='video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, format=(fourcc)BGRA, red_mask=(int)65280, green_mask=(int)16711680, blue_mask=(int)-16777216, width=(int)1280, height=(int)720, framerate=(fraction)24/1, pixel-aspect-ratio=(fraction)1/1, interlaced=(boolean)false'
-SRC='shmsrc socket-path=/tmp/mixer1 do-timestamp=true is-live=true'
-
-        (echo 'audio sink ctr isaudio 1' ; cat>/dev/null) |  /bin/nc 127.0.0.1 9999 | (head -1 ; gst-launch -q -e mpegtsmux name=muxer ! mpegtsparse ! queue ! tcpserversink port=5010 $SRC ! $MIXERFORMAT ! queue leaky=2 ! ffmpegcolorspace ! queue ! x264enc $X264SETTINGS ! h264parse ! queue ! muxer. fdsrc fd=0 ! $AUDIOFORMAT ! audiorate ! lamemp3enc ! queue ! muxer.)
-        #gst-launch -q -e mpegtsmux name=muxer ! mpegtsparse ! queue ! tcpserversink port=5010 $SRC ! $MIXERFORMAT ! queue leaky=2 ! ffmpegcolorspace ! queue ! x264enc $X264SETTINGS ! h264parse ! queue ! muxer.
-

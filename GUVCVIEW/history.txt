@@ -1,1 +1,25 @@
-    1  history > history.txt
+    1  ls
+    2  cd Documents/
+    3  ls
+    4  cd RogueSquadran/
+    5  ls
+    6  cd GUVCVIEW/
+    7  ls
+    8  cd guvcview-src-1.7.1/
+    9  ls
+   10  sudo apt-get install libavutil-dev
+   11  sudo apt-get install libavcodec-dev
+   12  sudo apt-get install libpng-dev
+   13  sudo apt-get install portaudio19-dev
+   14  sudo apt-get install sdl-dev
+   15  sudo apt-get install libsdl-dev
+   16  run apt-get update
+   17  apt-get update
+   18  sudo apt-get install libsdl-dev
+   19  sudo apt-get install glib-2.0-dev
+   20* sudo apt-get install gtk+-3.0-d
+   21  history
+   22  ls
+   23  cd ..
+   24  ls
+   25  history > history.txt

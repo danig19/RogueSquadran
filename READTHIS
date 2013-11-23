@@ -1,0 +1,27 @@
+/* IMPORTANT: TASK LIST 
+
+FOR WHO: EVERYONE!
+
+PLEASE UPDATE WHEN YOU FINISH OR WORK ON SOMETHING
+
+Thanks,
+
+Danielle
+*/
+
+-test videos using 4 different feeds (20min - 1hr videos):
+1. recording (guvcview)
+2. processing (ffmpeg)
+Note: save and upload to repository when finished (we can send it off to clark )
+
+-adding text (ffmpeg) to the post processed files
+1. gps mapping
+2. time stamping (this may already be tracked in guvcview - thought we saw something in the code)
+
+-record the length of time
+description: how long will it take to record (guvcview - taking note of additional time) AND after recording the videos to process (ffmpeg) 
+
+-work on flagging 
+description: (in software) recording real-time stamp on num-pad button press - save to A text file
+
+

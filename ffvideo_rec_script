@@ -1,7 +1,0 @@
-#!/bin/bash
-# guvcview script
-
-echo "Starting ffmpeg recording: "
-ffmpeg -an -f video4linux2 -vcodec mjpeg -t 00:10:00 -s 640x480 -r 10 -i /dev/video0 test01.avi &
-sleep 3 &
-ffmpeg -an -f video4linux2 -vcodec mjpeg -t 00:10:00 -s 6400x480 -r 10 -i /dev/video1 test02.avi

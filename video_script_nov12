@@ -1,7 +1,0 @@
-#!/bin/bash
-# guvcview script
-
-echo "Starting guvcview"
-/home/odroid/RogueSquadran/GUVCVIEW/guvcview-src-1.7.1/src/guvcview -g ~/.config/guvcview/video0 -d /dev/video0 &
-sleep 3 &
-/home/odroid/RogueSquadran/GUVCVIEW/guvcview-src-1.7.1/src/guvcview -g ~/.config/guvcview/video1 -d /dev/video1 &
